@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name" translatable="false">G21904825_21904341</string>
+
+    <string name="drawer_open" translatable="false">Opened</string>
+    <string name="drawer_close" translatable="false">Closed</string>
+
+    <string name="home">Home</string>
+    <string name="list">List</string>
+    <string name="map">Map</string>
+    <string name="registered">Registered</string>
+    <string name="info">Info</string>
+</resources>
