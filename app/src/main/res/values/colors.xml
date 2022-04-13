@@ -6,4 +6,10 @@
     <color name="colorPrimaryDark">#475C6C</color>
     <color name="colorAccent">#D81B1B</color>
 
+    <color name="reduced">#7ED956</color>
+    <color name="moderate">#FFDE59</color>
+    <color name="high">#FF914C</color>
+    <color name="very_high">#FF1717</color>
+    <color name="maximum">#8C0000</color>
+
 </resources>

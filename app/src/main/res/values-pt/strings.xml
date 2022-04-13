@@ -5,4 +5,12 @@
     <string name="map">Mapa</string>
     <string name="registered">Registados</string>
     <string name="info">Contactos</string>
+    <string name="reduced">Reduzido</string>
+    <string name="moderate">Moderado</string>
+    <string name="high">Elevado</string>
+    <string name="very_high">Muito Elevado</string>
+    <string name="maximum">Máximo</string>
+    <string name="info_1">Caso encontre algum erro não hesite em informar.</string>
+    <string name="info_2">Feito Por:</string>
+    <string name="info_3">Equipa</string>
 </resources>

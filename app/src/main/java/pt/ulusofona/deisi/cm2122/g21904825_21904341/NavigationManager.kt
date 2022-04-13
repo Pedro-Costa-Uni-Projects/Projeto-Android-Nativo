@@ -15,4 +15,12 @@ object NavigationManager {
         placeFragment(fm, DashboardFragment())
     }
 
+    fun goToMap(fm: FragmentManager) {
+        placeFragment(fm, MapFragment())
+    }
+
+    fun goToInfo(fm: FragmentManager) {
+        placeFragment(fm, InfoFragment())
+    }
+
 }

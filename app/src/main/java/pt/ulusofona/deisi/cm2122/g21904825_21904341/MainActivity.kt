@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Put tile here to change in first opening
-        title = getString(R.string.home)
+        title = "Chamas"
 
         if(!screenRotated(savedInstanceState)) {
             NavigationManager.goToDashBoard(supportFragmentManager)
@@ -50,6 +50,16 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.nav_dashboard -> {
                 NavigationManager.goToDashBoard(
+                    supportFragmentManager
+                )
+            }
+            R.id.nav_map -> {
+                NavigationManager.goToMap(
+                    supportFragmentManager
+                )
+            }
+            R.id.nav_info-> {
+                NavigationManager.goToInfo(
                     supportFragmentManager
                 )
             }

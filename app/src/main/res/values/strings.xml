@@ -9,4 +9,20 @@
     <string name="map">Map</string>
     <string name="registered">Registered</string>
     <string name="info">Info</string>
+
+    <string name="reduced">Reduced</string>
+    <string name="moderate">Moderate</string>
+    <string name="high">High</string>
+    <string name="very_high">Very High</string>
+    <string name="maximum">Maximum</string>
+
+    <string name="info_1">If you find any errors, don\'t hesitate to let us know.</string>
+    <string name="info_2">Made By:</string>
+    <string name="info_3">Team</string>
+
+    <string name="name_dev1" translatable="false">Pedro Costa</string>
+    <string name="name_dev2" translatable="false">Tomás Maia</string>
+    <string name="mail_dev1" translatable="false">a21904825@alunos.ulht.pt</string>
+    <string name="mail_dev2" translatable="false">a21904341@alunos.ulht.pt</string>
+
 </resources>
