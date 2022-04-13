@@ -2,6 +2,7 @@ package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         setSupportActionBar(binding.toolbar)
         setupDrawerMenu()
-
+        timer.start()
     }
 
     private fun screenRotated(savedInstanceState: Bundle?) : Boolean {
@@ -75,6 +76,41 @@ class MainActivity : AppCompatActivity() {
             finish()
         } else {
             super.onBackPressed()
+        }
+    }
+    
+    //Timer
+    private val timer = object : CountDownTimer(100000,20000) {
+        var count = 0
+        override fun onTick(time: Long) {
+            when(count) {
+                0 -> {
+                    binding.risk.setBackgroundColor(getColor(R.color.reduced))
+                    binding.risk.text = getString(R.string.reduced)
+                }
+                1 -> {
+                    binding.risk.setBackgroundColor(getColor(R.color.moderate))
+                    binding.risk.text = getString(R.string.moderate)
+                }
+                2 -> {
+                    binding.risk.setBackgroundColor(getColor(R.color.high))
+                    binding.risk.text = getString(R.string.high)
+                }
+                3 -> {
+                    binding.risk.setBackgroundColor(getColor(R.color.very_high))
+                    binding.risk.text = getString(R.string.very_high)
+                }
+                4 -> {
+                    binding.risk.setBackgroundColor(getColor(R.color.maximum))
+                    binding.risk.text = getString(R.string.maximum)
+                }
+            }
+            count++
+        }
+
+        override fun onFinish() {
+            count = 0
+            start()
         }
     }
 
