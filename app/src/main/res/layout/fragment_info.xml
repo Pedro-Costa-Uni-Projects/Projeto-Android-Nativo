@@ -5,147 +5,154 @@
     android:layout_height="match_parent"
     tools:context=".InfoFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:id="@+id/info_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/info_1"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:gravity="fill"
-            android:layout_marginBottom="25dp">
-        </TextView>
-
-        <TextView
-            android:id="@+id/info_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/info_2"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:gravity="fill"
-            android:layout_marginBottom="20dp">
-        </TextView>
-
-        <TextView
-            android:id="@+id/info_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/info_3"
-            android:textSize="25sp"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_marginBottom="15dp">
-        </TextView>
+        android:padding="15dp">
 
         <LinearLayout
-            android:id="@+id/layout_dev_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/dev_1"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_gravity="start"
-                android:src="@drawable/dev_1"
-                android:layout_marginBottom="30dp">
-            </ImageView>
+            <TextView
+                android:id="@+id/info_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/info_1"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:gravity="fill"
+                android:layout_marginBottom="25dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/info_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/info_2"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:gravity="fill"
+                android:layout_marginBottom="20dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/info_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/info_3"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="15dp">
+            </TextView>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/layout_dev_1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/name_dev1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name_dev1"
-                    android:textSize="17sp"
-                    android:textColor="@color/black"
-                    android:gravity="start"
-                    android:layout_marginBottom="15dp">
-                </TextView>
+                <ImageView
+                    android:id="@+id/dev_1"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="start"
+                    android:src="@drawable/dev_1"
+                    android:layout_marginBottom="30dp">
+                </ImageView>
 
-                <TextView
-                    android:id="@+id/mail_dev1"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mail_dev1"
-                    android:textSize="17sp"
-                    android:textColor="@color/black"
-                    android:gravity="start"
-                    android:layout_marginBottom="15dp">
-                </TextView>
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/name_dev1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name_dev1"
+                        android:textSize="17sp"
+                        android:textColor="@color/black"
+                        android:gravity="start"
+                        android:layout_marginBottom="15dp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/mail_dev1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mail_dev1"
+                        android:textSize="17sp"
+                        android:textColor="@color/black"
+                        android:gravity="start"
+                        android:layout_marginBottom="15dp">
+                    </TextView>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_dev_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/dev_2"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_gravity="start"
-                android:src="@drawable/dev_2"
-                android:layout_marginBottom="30dp">
-            </ImageView>
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/layout_dev_2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/name_dev2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name_dev2"
-                    android:textSize="17sp"
-                    android:textColor="@color/black"
-                    android:gravity="start"
-                    android:layout_marginBottom="15dp">
-                </TextView>
+                <ImageView
+                    android:id="@+id/dev_2"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="start"
+                    android:src="@drawable/dev_2"
+                    android:layout_marginBottom="30dp">
+                </ImageView>
 
-                <TextView
-                    android:id="@+id/mail_dev2"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mail_dev2"
-                    android:textSize="17sp"
-                    android:textColor="@color/black"
-                    android:gravity="start"
-                    android:layout_marginBottom="15dp">
-                </TextView>
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/name_dev2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name_dev2"
+                        android:textSize="17sp"
+                        android:textColor="@color/black"
+                        android:gravity="start"
+                        android:layout_marginBottom="15dp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/mail_dev2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mail_dev2"
+                        android:textSize="17sp"
+                        android:textColor="@color/black"
+                        android:gravity="start"
+                        android:layout_marginBottom="15dp">
+                    </TextView>
+
+                </LinearLayout>
 
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/ulht"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ulht"
+                android:layout_gravity="center">
+            </ImageView>
+
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/ulht"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/ulht"
-            android:layout_gravity="center">
-        </ImageView>
-
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
