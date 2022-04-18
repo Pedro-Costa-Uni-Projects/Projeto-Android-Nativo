@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapFragment">
+    tools:context=".ListFragment">
 
-    <ImageView
-        android:id="@+id/map_view"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_historic_fragment"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/temp_map"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop">
-    </ImageView>
+        android:padding="25dp"
+
+        />
 
 </FrameLayout>

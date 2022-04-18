@@ -7,7 +7,7 @@
     <string name="home">Home</string>
     <string name="list">List</string>
     <string name="map">Map</string>
-    <string name="registered">Registered</string>
+    <string name="register">Register</string>
     <string name="info">Info</string>
 
     <string name="reduced">Reduced</string>
@@ -24,5 +24,11 @@
     <string name="name_dev2" translatable="false">Tomás Maia</string>
     <string name="mail_dev1" translatable="false">a21904825@alunos.ulht.pt</string>
     <string name="mail_dev2" translatable="false">a21904341@alunos.ulht.pt</string>
+    <string name="fire_active">Active Fires In Portugal</string>
+    <string name="fire_active_municipality">Active Fires In %1$s</string>
+    <string name="fire_active_district">Active Fires In %1$s</string>
+    <string name="risk_levels">Risk Levels</string>
+    <string name="to_be_confirmed">To Be Confirmed</string>
+
 
 </resources>

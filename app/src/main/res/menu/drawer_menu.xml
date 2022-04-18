@@ -20,9 +20,9 @@
         </item>
 
         <item
-            android:id="@+id/nav_registed"
-            android:icon="@drawable/ic_registed"
-            android:title="@string/registered">
+            android:id="@+id/nav_register"
+            android:icon="@drawable/ic_register"
+            android:title="@string/register">
         </item>
 
         <item

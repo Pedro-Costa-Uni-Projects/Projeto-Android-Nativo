@@ -3,7 +3,7 @@
     <string name="home">Geral</string>
     <string name="list">Lista</string>
     <string name="map">Mapa</string>
-    <string name="registered">Registados</string>
+    <string name="register">Registar</string>
     <string name="info">Contactos</string>
     <string name="reduced">Reduzido</string>
     <string name="moderate">Moderado</string>
@@ -13,4 +13,9 @@
     <string name="info_1">Caso encontre algum erro não hesite em informar.</string>
     <string name="info_2">Feito Por:</string>
     <string name="info_3">Equipa</string>
+    <string name="fire_active">Incêndios Ativos Em Portugal</string>
+    <string name="fire_active_municipality">Incêndios Ativos Em %1$s</string>
+    <string name="risk_levels">Níveis de Risco</string>
+    <string name="fire_active_district">Incêndios Ativos Em %1$s</string>
+    <string name="to_be_confirmed">Por Confirmar</string>
 </resources>

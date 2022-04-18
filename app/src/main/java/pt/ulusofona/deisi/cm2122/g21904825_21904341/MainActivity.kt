@@ -1,12 +1,15 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.ActivityMainBinding
+
+var resourcesStatic : Resources? = null
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         if(!screenRotated(savedInstanceState)) {
             NavigationManager.goToDashBoard(supportFragmentManager)
         }
+
+        resourcesStatic = resources
     }
 
     override fun onStart() {
@@ -56,6 +61,18 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.nav_map -> {
                 NavigationManager.goToMap(
+                    supportFragmentManager
+                )
+            }
+            R.id.nav_list -> {
+                NavigationManager.goToList(
+                    supportFragmentManager
+                )
+                //var fire = Fire("Pedro", 123456789, "Setúbal", "")
+                //Singleton.add(fire)
+            }
+            R.id.nav_register -> {
+                NavigationManager.goToRegister(
                     supportFragmentManager
                 )
             }

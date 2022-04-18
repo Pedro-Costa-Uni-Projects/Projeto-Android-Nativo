@@ -19,6 +19,14 @@ object NavigationManager {
         placeFragment(fm, MapFragment())
     }
 
+    fun goToList(fm: FragmentManager) {
+        placeFragment(fm, ListFragment())
+    }
+
+    fun goToRegister(fm: FragmentManager) {
+        placeFragment(fm, RegisterFragment())
+    }
+
     fun goToInfo(fm: FragmentManager) {
         placeFragment(fm, InfoFragment())
     }
