@@ -18,7 +18,7 @@ class ListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.register)
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.list)
         binding.rvHistoricFragment.layoutManager = LinearLayoutManager(activity as Context)
         adapter.updateItems(fires)
         binding.rvHistoricFragment.adapter = adapter
