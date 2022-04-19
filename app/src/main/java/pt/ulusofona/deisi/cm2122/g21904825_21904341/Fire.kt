@@ -1,78 +1,120 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
-import android.content.res.Resources
 import java.text.SimpleDateFormat
 import java.util.*
 
 class Fire {
 
-    var nome : String = "NaN"
-    var cc : Int = 0
+    private var name : String = "NaN"
+    private var cc : Int = 0
 
-    var distrito : String = "NaN"
-    var concelho : String = "NaN"
-    var freguesia : String = "NaN"
+    private var district : String = "NaN"
+    private var county : String = "NaN"
+    private var parish : String = "NaN"
 
-    var operacionais : Int = 0
-    var veiculos : Int = 0
-    var aereos : Int = 0
+    private var operational : Int = 0
+    private var vehicles : Int = 0
+    private var aerial : Int = 0
 
-    var estado : String = "NaN"
-    var timestamp : Long = Date().time
-    var observacoes : String = "NaN"
-    var foto : String = "NaN"
+    private var state : String = "NaN"
+    private var timestamp : Long = Date().time
+    private var comments : String = "NaN"
+    private var photo : String = "NaN"
 
 
     //Constructor API
     constructor(
-        distrito: String,
-        concelho: String,
-        freguesia: String,
-        operacionais: Int,
-        veiculos: Int,
-        aereos: Int,
-        estado: String,
+        district: String,
+        county: String,
+        parish: String,
+        operational: Int,
+        vehicles: Int,
+        aerial: Int,
+        state: String,
         timestamp: Long,
-        observacoes: String,
-        foto: String
+        comments: String,
+        photo: String
     ) {
-        this.distrito = distrito
-        this.concelho = concelho
-        this.freguesia = freguesia
-        this.operacionais = operacionais
-        this.veiculos = veiculos
-        this.aereos = aereos
-        this.estado = "Por Confirmar"
+        this.district = district
+        this.county = county
+        this.parish = parish
+        this.operational = operational
+        this.vehicles = vehicles
+        this.aerial = aerial
+        this.state = state
         this.timestamp = timestamp
-        this.observacoes = observacoes
-        this.foto = foto
+        this.comments = comments
+        this.photo = photo
     }
 
 
     //Constructor new fire registration
-    constructor(nome: String, cc: Int, distrito: String, foto: String) {
-        this.nome = nome
+    constructor(name: String, cc: Int, district: String, foto: String) {
+        this.name = name
         this.cc = cc
-        this.distrito = distrito
-        this.foto = foto
-        this.estado = "Por Confirmar"
+        this.district = district
+        this.photo = photo
+        this.state = "Por Confirmar"
     }
 
-    fun data (): String {
-        var formatter = SimpleDateFormat("dd/MM/yyyy - HH:mm:ss")
-        var calender = Calendar.getInstance()
+    fun getData (): String {
+        val formatter = SimpleDateFormat("dd/MM/yyyy - HH:mm:ss")
+        val calender = Calendar.getInstance()
         calender.timeInMillis = this.timestamp
         return formatter.format(calender.time)
     }
 
     fun getState() : String {
-        if (this.estado == "Por Confirmar") {
+        if (this.state == "Por Confirmar") {
             return resourcesStatic!!.getString(R.string.to_be_confirmed)
         }
         return ""
     }
 
+    fun getName() : String {
+        if (this.name == "NaN") {
+            return resourcesStatic!!.getString(R.string.info_not_available)
+        }
+        return this.name
+    }
 
+    fun getCC() : String {
+        if (this.cc == 0) {
+            return resourcesStatic!!.getString(R.string.info_not_available)
+        }
+        return this.cc.toString()
+    }
 
+    fun getDistrict() : String {
+        return this.district
+    }
+
+    fun getCounty() : String {
+        return this.county
+    }
+
+    fun getParish() : String {
+        return this.parish
+    }
+
+    fun getOperational() : String {
+        return this.operational.toString()
+    }
+
+    fun getVehicles() : String {
+        return this.vehicles.toString()
+    }
+
+    fun getAerial() : String {
+        return this.aerial.toString()
+    }
+
+    fun getComments() : String {
+        return this.comments
+    }
+
+    fun getPhoto() : String {
+        return this.photo
+    }
 
 }

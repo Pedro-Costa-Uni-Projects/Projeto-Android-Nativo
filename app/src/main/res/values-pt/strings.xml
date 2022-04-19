@@ -18,4 +18,5 @@
     <string name="risk_levels">Níveis de Risco</string>
     <string name="fire_active_district">Incêndios Ativos Em %1$s</string>
     <string name="to_be_confirmed">Por Confirmar</string>
+    <string name="info_not_available">Informação Não Disponível</string>
 </resources>

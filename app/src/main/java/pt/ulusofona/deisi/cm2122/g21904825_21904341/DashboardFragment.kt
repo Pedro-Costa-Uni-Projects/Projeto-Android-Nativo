@@ -41,13 +41,13 @@ class DashboardFragment : Fragment() {
         val district = Singleton.getDistrict()
         binding.fireActiveDistrict.text = getString(R.string.fire_active_district, district)
 
-        val activeDistrict = Singleton.activeDistrictandMunicipality("d")
+        val activeDistrict = Singleton.activeDistrictandCounty("d")
         binding.fireActiveDistrictNumber.text = activeDistrict.toString()
 
-        val municipality = Singleton.getMunicipality()
+        val municipality = Singleton.getCounty()
         binding.fireActiveMunicipality.text = getString(R.string.fire_active_municipality, municipality)
 
-        val activeMunicipality = Singleton.activeDistrictandMunicipality("m")
+        val activeMunicipality = Singleton.activeDistrictandCounty("m")
         binding.fireActiveMunicipalityNumber.text = activeMunicipality.toString()
 
     }

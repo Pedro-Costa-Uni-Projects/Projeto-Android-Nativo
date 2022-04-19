@@ -1,6 +1,5 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -25,8 +24,8 @@ class ListAdapter (private val onFireClick: (Fire) -> Unit,
             onFireClick(items[position])
         }
         val fire = items[position]
-        holder.binding.textData.text = fire.data()
-        holder.binding.textLocalization.text = "${fire.distrito}, ${fire.concelho}, ${fire.freguesia}"
+        holder.binding.textData.text = fire.getData()
+        holder.binding.textLocalization.text = "${fire.getDistrict()}, ${fire.getCounty()}, ${fire.getParish()}"
         holder.binding.textStatus.text = fire.getState()
 
     }
