@@ -49,8 +49,8 @@
     <string name="photo_form">Photo</string>
 
     <string name="required_fields">* required fields</string>
-
     <string name="submit_button">Submit</string>
+
     <string name="localization_details">Localization</string>
     <string name="state_details">State</string>
     <string name="operational_details">Operational Dispatch</string>
