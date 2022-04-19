@@ -9,6 +9,7 @@
     <string name="map">Map</string>
     <string name="register">Register</string>
     <string name="info">Info</string>
+    <string name="details">Details</string>
 
     <string name="reduced">Reduced</string>
     <string name="moderate">Moderate</string>
@@ -24,12 +25,40 @@
     <string name="name_dev2" translatable="false">Tomás Maia</string>
     <string name="mail_dev1" translatable="false">a21904825@alunos.ulht.pt</string>
     <string name="mail_dev2" translatable="false">a21904341@alunos.ulht.pt</string>
+
     <string name="fire_active">Active Fires In Portugal</string>
     <string name="fire_active_municipality">Active Fires In %1$s</string>
     <string name="fire_active_district">Active Fires In %1$s</string>
+
     <string name="risk_levels">Risk Levels</string>
+
     <string name="to_be_confirmed">To Be Confirmed</string>
+
     <string name="info_not_available">Information Not Available</string>
+
+    <string name="name_form">Name *</string>
+    <string name="name_hint_form">Name and Surname</string>
+
+    <string name="cc_form" translatable="false">CC *</string>
+    <string name="cc_hint_form" translatable="false">12345678</string>
+
+    <string name="district_form">District *</string>
+    <string name="district_hint_form">Choose An Option</string>
+
+    <string name="date_form">Date and Hour *</string>
+    <string name="photo_form">Photo</string>
+
+    <string name="required_fields">* required fields</string>
+
+    <string name="submit_button">Submit</string>
+    <string name="localization_details">Localization</string>
+    <string name="state_details">State</string>
+    <string name="operational_details">Operational Dispatch</string>
+    <string name="photos_details">Photos</string>
+    <string name="observations_details">Observations</string>
+    <string name="name_cc_details">Reported By:</string>
+    <string name="name_details">Name: %1$s</string>
+    <string name="cc_details">CC: %1$s</string>
 
 
 </resources>

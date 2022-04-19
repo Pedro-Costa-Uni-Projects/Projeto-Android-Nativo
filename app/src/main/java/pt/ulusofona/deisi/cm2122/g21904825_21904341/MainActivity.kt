@@ -7,6 +7,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.ActivityMainBinding
 
 var resourcesStatic : Resources? = null
@@ -68,8 +71,12 @@ class MainActivity : AppCompatActivity() {
                 NavigationManager.goToList(
                     supportFragmentManager
                 )
-                //var fire = Fire("Pedro", 123456789, "Setúbal", "")
-                //Singleton.add(fire)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    var fire = Fire("Pedro", 123456789, "Setúbal", "")
+                    Singleton.add(fire)
+                }
+
             }
             R.id.nav_register -> {
                 NavigationManager.goToRegister(

@@ -31,4 +31,8 @@ object NavigationManager {
         placeFragment(fm, InfoFragment())
     }
 
+    fun goToDetails(fm: FragmentManager) {
+        placeFragment(fm, DetailsFragment())
+    }
+
 }

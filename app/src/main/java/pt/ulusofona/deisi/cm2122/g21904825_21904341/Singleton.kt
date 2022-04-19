@@ -1,9 +1,35 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 object Singleton {
+    private var listDistricts : ArrayList<String> = arrayListOf(
+        resourcesStatic!!.getString(R.string.district_hint_form),
+        "Aveiro",
+        "Beja",
+        "Braga",
+        "Bragança",
+        "Castelo Branco",
+        "Coimbra",
+        "Évora",
+        "Faro",
+        "Guarda",
+        "Leiria",
+        "Lisboa",
+        "Portalegre",
+        "Porto",
+        "Santarém",
+        "Setúbal",
+        "Viana do Castelo",
+        "Vila Real",
+        "Viseu"
+    )
+
     private var fires : ArrayList<Fire> = ArrayList()
     private var district : String = "Setúbal"
     private var county : String = "Barreiro"
+
+    fun getListDistricts() : ArrayList<String> {
+        return this.listDistricts
+    }
 
     fun add(fire : Fire) {
         fires.add(fire)

@@ -33,7 +33,8 @@ class ListFragment : Fragment() {
 
 
     private fun onFireClick(fire: Fire) {
-        Toast.makeText(activity as Context, fire.getData(), Toast.LENGTH_LONG).show()
-
+        NavigationManager.goToDetails(
+            parentFragmentManager
+        )
     }
 }
