@@ -32,7 +32,7 @@ object Singleton {
     }
 
     fun add(fire : Fire) {
-        fires.add(fire)
+        fires.add(0, fire)
     }
 
     fun getList() : ArrayList<Fire> {
@@ -47,7 +47,7 @@ object Singleton {
         return fires.size
     }
 
-    fun activeDistrictandCounty(option : String) : Int {
+    fun activeDistrictAndCounty(option : String) : Int {
         var activeDistrict = 0
         var activeCounty = 0
         for (fire in fires) {
