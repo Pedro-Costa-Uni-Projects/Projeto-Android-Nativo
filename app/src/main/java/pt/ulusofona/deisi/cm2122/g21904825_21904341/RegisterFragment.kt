@@ -15,6 +15,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.FragmentRegisterBinding
 import java.util.*
 
@@ -85,14 +88,14 @@ class RegisterFragment : Fragment() {
             }
 
             //cc
-            if(binding.cc.editableText.toString() != "") {
-                cc = binding.cc.editableText.toString().toInt()
-            } else if (binding.cc.editableText.toString() == ""){
+            if(binding.cc.editableText.toString() == "" ) {
                 binding.cc.error = getString(R.string.error_empty_fill)
                 cc = 0
             } else if (binding.cc.editableText.toString().length < 8){
                 binding.cc.error = getString(R.string.error_cc_fill)
                 cc = 0
+            } else if (binding.cc.editableText.toString() != "" ){
+                cc = binding.cc.editableText.toString().toInt()
             }
 
             //district
@@ -106,7 +109,12 @@ class RegisterFragment : Fragment() {
             //Submit
             if (name != "" && cc != 0 && district != "") {
                 val fire = Fire(name, cc, district, timestamp, photo)
-                Singleton.add(fire)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    Singleton.add(fire)
+                }
+
+                //Ir para Lista
                 NavigationManager.goToList(parentFragmentManager)
             }
 
