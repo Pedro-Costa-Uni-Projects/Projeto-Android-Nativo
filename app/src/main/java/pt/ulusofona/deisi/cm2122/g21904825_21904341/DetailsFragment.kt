@@ -51,7 +51,9 @@ class DetailsFragment : Fragment() {
         binding.peoples.text = fire?.getOperational()
 
         //Fotografia
-        binding.photo.setImageBitmap(fire?.getPhoto())
+        if(fire?.getPhoto() != null) {
+            binding.photo.setImageBitmap(fire?.getPhoto())
+        }
 
         //Observações
         binding.observations.text = fire?.getComments()
