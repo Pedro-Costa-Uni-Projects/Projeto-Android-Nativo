@@ -25,7 +25,7 @@ class ListAdapter (private val onFireClick: (Fire) -> Unit,
         }
         val fire = items[position]
         holder.binding.textData.text = getData(fire.getTimestamp())
-        holder.binding.textLocalization.text = "${fire.getDistrict()}, ${fire.getCounty()}, ${fire.getParish()}"
+        holder.binding.textLocalization.text = resourcesStatic!!.getString(R.string.localization_list_details, fire?.getDistrict(), fire?.getCounty(), fire?.getParish())
         holder.binding.textStatus.text = fire.getState()
 
     }

@@ -38,7 +38,28 @@ class DetailsFragment : Fragment() {
         super.onStart()
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.details)
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Localização
+        binding.localization.text = getString(R.string.localization_list_details, fire?.getDistrict(), fire?.getCounty(), fire?.getParish())
+
+        //Estado e Data
+        binding.data.text = fire?.getTimestamp()?.let { getData(it) }
+        binding.state.text = fire?.getState()
+
+        //Operacionais
+        binding.planes.text = fire?.getAerial()
+        binding.cars.text = fire?.getVehicles()
+        binding.peoples.text = fire?.getOperational()
+
+        //Fotografia
+        binding.photo.setImageBitmap(fire?.getPhoto())
+
+        //Observações
+        binding.observations.text = fire?.getComments()
+
+        //Nome e CC
+        binding.name.text = getString(R.string.name_details,  fire?.getName())
+        binding.cc.text = getString(R.string.cc_details, fire?.getCC())
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
