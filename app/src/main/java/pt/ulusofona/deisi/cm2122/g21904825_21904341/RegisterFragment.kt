@@ -41,6 +41,8 @@ class RegisterFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+
+        //Força esta orientação para resolver bug da foto desaparecer
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 

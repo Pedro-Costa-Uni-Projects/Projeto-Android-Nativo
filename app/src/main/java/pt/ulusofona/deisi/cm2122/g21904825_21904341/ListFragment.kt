@@ -18,7 +18,7 @@ class ListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED //Para poder rodar o ecrã depois de vir do Register
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.list)
         binding.rvHistoricFragment.layoutManager = LinearLayoutManager(activity as Context)
         adapter.updateItems(fires)
