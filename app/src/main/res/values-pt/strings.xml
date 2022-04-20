@@ -36,4 +36,6 @@
     <string name="name_cc_details">Reportado Por:</string>
     <string name="name_details">Nome:  %1$s</string>
     <string name="cc_details">CC: %1$s</string>
+    <string name="error_empty_fill">Preenchimento Obrigatório</string>
+    <string name="error_cc_fill">Tamanho Errado</string>
 </resources>

@@ -59,6 +59,8 @@
     <string name="name_cc_details">Reported By:</string>
     <string name="name_details">Name: %1$s</string>
     <string name="cc_details">CC: %1$s</string>
+    <string name="error_empty_fill">Required Fill</string>
+    <string name="error_cc_fill">Wrong Size</string>
 
 
 </resources>

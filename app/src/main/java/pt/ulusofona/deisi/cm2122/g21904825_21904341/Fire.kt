@@ -1,6 +1,6 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
-import java.text.SimpleDateFormat
+import android.graphics.Bitmap
 import java.util.*
 
 class Fire {
@@ -19,7 +19,7 @@ class Fire {
     private var state : String = "NaN"
     private var timestamp : Long = Date().time
     private var comments : String = "NaN"
-    private var photo : String = "NaN"
+    private var photo : Bitmap? = null
 
 
     //Constructor API
@@ -33,7 +33,7 @@ class Fire {
         state: String,
         timestamp: Long,
         comments: String,
-        photo: String
+        photo: Bitmap
     ) {
         this.district = district
         this.county = county
@@ -49,19 +49,13 @@ class Fire {
 
 
     //Constructor new fire registration
-    constructor(name: String, cc: Int, district: String, foto: String) {
+    constructor(name: String, cc: Int, district: String, timestamp: Long, photo: Bitmap?) {
         this.name = name
         this.cc = cc
         this.district = district
         this.photo = photo
+        this.timestamp = timestamp
         this.state = "Por Confirmar"
-    }
-
-    fun getData (): String {
-        val formatter = SimpleDateFormat("dd/MM/yyyy - HH:mm:ss")
-        val calender = Calendar.getInstance()
-        calender.timeInMillis = this.timestamp
-        return formatter.format(calender.time)
     }
 
     fun getState() : String {
@@ -113,8 +107,12 @@ class Fire {
         return this.comments
     }
 
-    fun getPhoto() : String {
+    fun getPhoto() : Bitmap? {
         return this.photo
+    }
+
+    fun getTimestamp() : Long {
+        return this.timestamp
     }
 
 }

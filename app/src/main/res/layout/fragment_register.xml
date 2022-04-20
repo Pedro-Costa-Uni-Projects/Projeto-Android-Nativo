@@ -154,9 +154,10 @@
 
                 <ImageView
                     android:id="@+id/photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:src="@drawable/ic_photo">
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/ic_photo"
+                    android:layout_gravity="center">
                 </ImageView>
 
             </LinearLayout>
@@ -171,6 +172,7 @@
             </TextView>
 
             <Button
+                android:id="@+id/button_submit"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button"

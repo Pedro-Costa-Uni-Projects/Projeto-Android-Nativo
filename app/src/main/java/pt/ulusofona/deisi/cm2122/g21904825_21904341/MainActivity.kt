@@ -71,12 +71,6 @@ class MainActivity : AppCompatActivity() {
                 NavigationManager.goToList(
                     supportFragmentManager
                 )
-
-                CoroutineScope(Dispatchers.IO).launch {
-                    var fire = Fire("Pedro", 123456789, "Setúbal", "")
-                    Singleton.add(fire)
-                }
-
             }
             R.id.nav_register -> {
                 NavigationManager.goToRegister(

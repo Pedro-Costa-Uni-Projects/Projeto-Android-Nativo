@@ -24,8 +24,8 @@ object Singleton {
     )
 
     private var fires : ArrayList<Fire> = ArrayList()
-    private var district : String = "Setúbal"
-    private var county : String = "Barreiro"
+    private var district : String = "Setúbal" //Pre preenchido
+    private var county : String = "Barreiro" //Pre preenchido
 
     fun getListDistricts() : ArrayList<String> {
         return this.listDistricts
