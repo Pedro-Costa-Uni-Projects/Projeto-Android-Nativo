@@ -34,7 +34,7 @@ class ListFragment : Fragment() {
 
     private fun onFireClick(fire: Fire) {
         NavigationManager.goToDetails(
-            parentFragmentManager
+            parentFragmentManager, fire
         )
     }
 }
