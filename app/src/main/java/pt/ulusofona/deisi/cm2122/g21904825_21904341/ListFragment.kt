@@ -16,6 +16,16 @@ class ListFragment : Fragment() {
     private  var fires = Singleton.getList()
     private val adapter = ListAdapter(::onFireClick)
 
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.list)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.list)
+    }
+
     override fun onStart() {
         super.onStart()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED //Para poder rodar o ecrã depois de vir do Register

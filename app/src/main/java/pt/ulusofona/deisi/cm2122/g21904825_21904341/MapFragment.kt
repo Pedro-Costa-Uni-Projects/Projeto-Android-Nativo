@@ -17,12 +17,14 @@ class MapFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.map)
     }
 
     //Para não rodar o ecrã
     override fun onPause() {
         super.onPause()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.map)
     }
 
     override fun onCreateView(

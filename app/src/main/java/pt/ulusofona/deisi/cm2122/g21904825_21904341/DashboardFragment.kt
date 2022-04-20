@@ -16,12 +16,14 @@ class DashboardFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
     }
 
     //Para não rodar o ecrã
     override fun onPause() {
         super.onPause()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
     }
 
     override fun onCreateView(

@@ -35,6 +35,7 @@ class RegisterFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.register)
     }
 
     //Para não rodar o ecrã
@@ -44,6 +45,8 @@ class RegisterFragment : Fragment() {
 
         //Força esta orientação para resolver bug da foto desaparecer
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.register)
     }
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

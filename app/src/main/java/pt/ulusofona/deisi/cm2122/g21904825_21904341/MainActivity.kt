@@ -22,9 +22,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Put tile here to change in first opening
-        title = "Chamas"
-
         if(!screenRotated(savedInstanceState)) {
             NavigationManager.goToDashBoard(supportFragmentManager)
         }
