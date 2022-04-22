@@ -10,3 +10,8 @@
 </p>
 
 ### Screenshots:
+#### DashBoard:
+<p align="center">
+  <img src="images/dashboard1.jpg">
+  <img src="images/dashboard2.jpg">
+</p>
