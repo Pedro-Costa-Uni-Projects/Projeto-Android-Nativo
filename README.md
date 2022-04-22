@@ -39,3 +39,16 @@
   <img src="images/lista1.jpg">
   <img src="images/lista2.jpg">
 </p>
+
+#### Detalhes:
+<p align="center">
+  <img src="images/detalhes1.jpg">
+  <img src="images/detalhes2.jpg">
+</p>
+
+#### Contactos:
+<p align="center">
+  <img src="images/contactos1.jpg">
+</p>
+
+##### Nota: Ao clicar em cada nome/email/foto, irá pedir para escolher qual serviço de email pertende usar, preenchendo automaticamente o campo de email, ao clicar na foto da ULHT irá abrir a página web da mesma
