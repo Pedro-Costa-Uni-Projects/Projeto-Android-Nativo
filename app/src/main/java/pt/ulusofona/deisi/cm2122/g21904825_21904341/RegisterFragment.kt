@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -119,6 +120,9 @@ class RegisterFragment : Fragment() {
                 CoroutineScope(Dispatchers.IO).launch {
                     Singleton.add(fire)
                 }
+
+                //Mensagem de sucesso
+                Toast.makeText(this.context, getString(R.string.submitted), Toast.LENGTH_SHORT).show()
 
                 //Ir para Lista
                 NavigationManager.goToList(parentFragmentManager)

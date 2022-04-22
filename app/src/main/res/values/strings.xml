@@ -62,6 +62,7 @@
     <string name="error_empty_fill">Required Fill</string>
     <string name="error_cc_fill">Wrong Size</string>
     <string name="localization_list_details" translatable="false">%1$s, %2$s, %3$s</string>
+    <string name="submitted">Submitted With Success</string>
 
 
 </resources>

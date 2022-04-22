@@ -11,6 +11,7 @@
 
 ### Screenshots:
 #### DashBoard:
+#### Estes valores são alterados automaticamente dependendo dos fogos registados e futuramente os da API
 <p align="center">
   <img src="images/dashboard1.jpg">
   <img src="images/dashboard2.jpg">

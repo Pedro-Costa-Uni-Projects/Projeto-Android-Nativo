@@ -38,4 +38,5 @@
     <string name="cc_details">CC: %1$s</string>
     <string name="error_empty_fill">Preenchimento Obrigatório</string>
     <string name="error_cc_fill">Tamanho Errado</string>
+    <string name="submitted">Submetido Com Sucesso</string>
 </resources>
