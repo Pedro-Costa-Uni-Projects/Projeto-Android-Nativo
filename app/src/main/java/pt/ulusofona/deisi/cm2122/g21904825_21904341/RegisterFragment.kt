@@ -1,5 +1,6 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -16,6 +17,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.fondesa.kpermissions.allGranted
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.extension.send
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,7 +58,7 @@ class RegisterFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_register, container, false)
         binding = FragmentRegisterBinding.bind(view)
 
-        //Get Foto
+        //Tem que ser aqui se não da erro
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -63,10 +67,8 @@ class RegisterFragment : Fragment() {
         }
 
         binding.photo.setOnClickListener {
-            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            resultLauncher.launch(cameraIntent)
+            takePhoto()
         }
-        //Get Foto
 
         return binding.root
     }
@@ -137,4 +139,14 @@ class RegisterFragment : Fragment() {
         binding.photo.setImageBitmap(photo)
     }
 
+    private fun takePhoto() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        permissionsBuilder(Manifest.permission.CAMERA).build().send { result->
+            if (result.allGranted()) {
+                resultLauncher.launch(cameraIntent)
+            } else {
+                Toast.makeText(context, getString(R.string.no_camera), Toast.LENGTH_LONG).show()
+            }
+        }
+    }
 }
