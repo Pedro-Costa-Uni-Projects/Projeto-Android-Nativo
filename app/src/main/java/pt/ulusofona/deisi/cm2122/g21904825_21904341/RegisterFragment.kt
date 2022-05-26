@@ -2,9 +2,11 @@ package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import android.Manifest
 import android.app.Activity
+import android.app.SearchableInfo
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -24,7 +26,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.FragmentRegisterBinding
+import java.io.ByteArrayOutputStream
 import java.util.*
+import org.apache.commons.codec.binary.Base64
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
@@ -34,7 +38,7 @@ class RegisterFragment : Fragment() {
     private var cc = 0
     private var district = ""
     private var timestamp = 0L
-    private var photo : Bitmap? = null
+    private var photo : String? = null
 
     //Para não rodar o ecrã
     override fun onResume() {
@@ -61,9 +65,16 @@ class RegisterFragment : Fragment() {
         //Tem que ser aqui se não da erro
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                handleCameraImage(result.data)
-            }
+                    if (result.resultCode == Activity.RESULT_OK) {
+                        val bitmap = result.data?.extras?.get("data") as Bitmap
+                        val baos = ByteArrayOutputStream()
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val photoByteArray = baos.toByteArray()
+                            photo = Base64.encodeBase64(photoByteArray).toString(Charsets.UTF_8)
+                            binding.photo.setImageBitmap(BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.size))
+                        }
+                    }
         }
 
         binding.photo.setOnClickListener {
@@ -117,10 +128,10 @@ class RegisterFragment : Fragment() {
 
             //Submit
             if (name != "" && cc != 0 && district != "") {
-                val fire = Fire(name, cc, district, timestamp, photo)
+                val fire = FireRoom(name, cc, district, "NaN", "NaN", 0, 0, 0, "NaN", timestamp, "NaN", photo)
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    Singleton.add(fire)
+                    Singleton.dao?.insert(fire)
                 }
 
                 //Mensagem de sucesso
@@ -132,11 +143,6 @@ class RegisterFragment : Fragment() {
 
         }
 
-    }
-
-    private fun handleCameraImage(intent: Intent?) {
-        photo = intent?.extras?.get("data") as Bitmap
-        binding.photo.setImageBitmap(photo)
     }
 
     private fun takePhoto() {

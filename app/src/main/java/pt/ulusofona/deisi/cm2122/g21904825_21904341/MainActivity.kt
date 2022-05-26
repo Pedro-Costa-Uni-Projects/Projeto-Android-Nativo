@@ -1,5 +1,6 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.ActivityMainBinding
 
 var resourcesStatic : Resources? = null
+var contextStatic : Context? = null
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         resourcesStatic = resources
+        contextStatic = applicationContext
     }
 
     override fun onStart() {

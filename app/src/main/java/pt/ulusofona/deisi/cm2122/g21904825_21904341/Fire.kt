@@ -22,7 +22,7 @@ class Fire() : Parcelable {
     private var state : String = "NaN"
     private var timestamp : Long = Date().time
     private var comments : String = "NaN"
-    private var photo : Bitmap? = null
+    private var photo : ByteArray? = null
 
 
     //Constructor API
@@ -36,7 +36,7 @@ class Fire() : Parcelable {
         state: String,
         timestamp: Long,
         comments: String,
-        photo: Bitmap
+        photo: ByteArray
     ) : this() {
         this.district = district
         this.county = county
@@ -52,7 +52,7 @@ class Fire() : Parcelable {
 
 
     //Constructor new fire registration
-    constructor(name: String, cc: Int, district: String, timestamp: Long, photo: Bitmap?) : this() {
+    constructor(name: String, cc: Int, district: String, timestamp: Long, photo: ByteArray?) : this() {
         this.name = name
         this.cc = cc
         this.district = district
@@ -110,7 +110,7 @@ class Fire() : Parcelable {
         return this.comments
     }
 
-    fun getPhoto() : Bitmap? {
+    fun getPhoto() : ByteArray? {
         return this.photo
     }
 

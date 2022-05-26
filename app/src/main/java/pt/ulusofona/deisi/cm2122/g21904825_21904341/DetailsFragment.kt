@@ -1,6 +1,7 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import android.content.pm.ActivityInfo
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -52,7 +53,7 @@ class DetailsFragment : Fragment() {
 
         //Fotografia
         if(fire?.getPhoto() != null) {
-            binding.photo.setImageBitmap(fire?.getPhoto())
+            binding.photo.setImageBitmap(BitmapFactory.decodeByteArray(fire?.getPhoto(), 0, fire?.getPhoto()!!.size))
         }
 
         //Observações

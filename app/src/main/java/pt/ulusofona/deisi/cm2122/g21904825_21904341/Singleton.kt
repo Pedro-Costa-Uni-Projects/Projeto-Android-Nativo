@@ -1,6 +1,14 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.apache.commons.codec.binary.Base64
+import javax.security.auth.callback.Callback
+
 object Singleton {
+    var dao = contextStatic?.let { FireDatabase.getInstance(it.applicationContext).fireDao() }
+
     private var listDistricts : ArrayList<String> = arrayListOf(
         resourcesStatic!!.getString(R.string.district_hint_form),
         "Aveiro",
@@ -36,11 +44,13 @@ object Singleton {
     }
 
     fun getList() : ArrayList<Fire> {
+        CoroutineScope(Dispatchers.IO).launch {
+            val firesDao = dao?.getAll()
+            fires = firesDao?.map {
+                Fire(it.name, it.cc, it.district, it.timestamp, Base64.decodeBase64(it.photo))
+            } as ArrayList<Fire>
+        }
         return fires
-    }
-
-    fun newList(list : ArrayList<Fire>) {
-        fires = list
     }
 
     fun activeFires() : Int {
@@ -76,4 +86,7 @@ object Singleton {
         return county
     }
 
+    fun getAllFires(onFinished: (ArrayList<Fire>)) {
+
+    }
 }
