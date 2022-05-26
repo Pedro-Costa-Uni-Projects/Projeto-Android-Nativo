@@ -69,7 +69,7 @@ class RegisterFragment : Fragment() {
                         val bitmap = result.data?.extras?.get("data") as Bitmap
                         val baos = ByteArrayOutputStream()
                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
-                        CoroutineScope(Dispatchers.IO).launch {
+                        CoroutineScope(Dispatchers.Main).launch {
                             val photoByteArray = baos.toByteArray()
                             photo = Base64.encodeBase64(photoByteArray).toString(Charsets.UTF_8)
                             binding.photo.setImageBitmap(BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.size))

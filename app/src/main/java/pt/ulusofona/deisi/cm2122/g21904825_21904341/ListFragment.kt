@@ -9,11 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
-    private  var fires = Singleton.getList()
+    private  var fires = arrayListOf<Fire>()
     private val adapter = ListAdapter(::onFireClick)
 
     override fun onResume() {
@@ -30,8 +33,8 @@ class ListFragment : Fragment() {
         super.onStart()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED //Para poder rodar o ecrã depois de vir do Register
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.list)
+        Singleton.getList{updateAdapter()}
         binding.rvHistoricFragment.layoutManager = LinearLayoutManager(activity as Context)
-        adapter.updateItems(fires)
         binding.rvHistoricFragment.adapter = adapter
     }
 
@@ -47,5 +50,13 @@ class ListFragment : Fragment() {
         NavigationManager.goToDetails(
             parentFragmentManager, fire
         )
+    }
+
+    private fun updateAdapter() {
+        fires = Singleton.getList {}
+        CoroutineScope(Dispatchers.Main).launch {
+            adapter.updateItems(fires)
+        }
+
     }
 }

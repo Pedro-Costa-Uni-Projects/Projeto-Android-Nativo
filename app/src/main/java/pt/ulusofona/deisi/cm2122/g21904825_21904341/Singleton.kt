@@ -43,12 +43,13 @@ object Singleton {
         fires.add(0, fire)
     }
 
-    fun getList() : ArrayList<Fire> {
+    fun getList(updateAdapter: (() -> Unit)) : ArrayList<Fire> {
         CoroutineScope(Dispatchers.IO).launch {
             val firesDao = dao?.getAll()
             fires = firesDao?.map {
                 Fire(it.name, it.cc, it.district, it.timestamp, Base64.decodeBase64(it.photo))
             } as ArrayList<Fire>
+            updateAdapter()
         }
         return fires
     }
