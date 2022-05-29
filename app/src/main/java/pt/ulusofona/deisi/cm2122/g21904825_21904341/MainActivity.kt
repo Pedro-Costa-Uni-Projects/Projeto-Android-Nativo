@@ -31,7 +31,16 @@ class MainActivity : AppCompatActivity() {
         resourcesStatic = resources
         contextStatic = applicationContext
 
-        Singleton.getFromAPIaddToLocalDB()
+        //Se tem ligação a internet limpa a bd
+        // deixando apenas os fogos inseridos manualmente,
+        // depois vai buscar a api os fogos mais recentes
+        if (ConnectivityUtil.isOnline(this.applicationContext)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                Singleton.dao?.purgeDB(true)
+                Singleton.getFromAPIaddToLocalDB()
+            }
+        }
+
     }
 
     override fun onStart() {

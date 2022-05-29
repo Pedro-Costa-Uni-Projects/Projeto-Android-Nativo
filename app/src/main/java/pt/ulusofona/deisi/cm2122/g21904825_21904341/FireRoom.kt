@@ -8,6 +8,7 @@ import java.util.*
 @Entity(tableName = "fire")
 data class FireRoom (
 
+    @ColumnInfo (name= "is_api") val isFromAPI: Boolean,
     @ColumnInfo (name = "name") val name: String,
     @ColumnInfo (name = "cc") val cc: Int,
     @ColumnInfo (name = "district") val district: String,

@@ -63,7 +63,7 @@ object Singleton {
             try {
                 val firesAPI = service.getAllFires().data
                 firesAPI.map {
-                    val fire = FireRoom("NaN", 0, it.district, it.concelho, it.freguesia, it.man, it.terrain, it.aerial, it.status, (it.dateTime.sec).toLong() * 1000, "${resourcesStatic!!.getString(R.string.nature_fire)} : ${it.natureza}",null)
+                    val fire = FireRoom(true,"NaN", 0, it.district, it.concelho, it.freguesia, it.man, it.terrain, it.aerial, it.status, (it.dateTime.sec).toLong() * 1000, "${resourcesStatic!!.getString(R.string.nature_fire)} : ${it.natureza}",null)
                     dao?.insert(fire)
                 }
             }catch (ex: HttpException) {

@@ -128,7 +128,7 @@ class RegisterFragment : Fragment() {
 
             //Submit
             if (name != "" && cc != 0 && district != "") {
-                val fire = FireRoom(name, cc, district, "NaN", "NaN", 0, 0, 0, "NaN", timestamp, "NaN", photo)
+                val fire = FireRoom(false, name, cc, district, "NaN", "NaN", 0, 0, 0, "NaN", timestamp, "NaN", photo)
 
                 CoroutineScope(Dispatchers.IO).launch {
                     Singleton.dao?.insert(fire)
