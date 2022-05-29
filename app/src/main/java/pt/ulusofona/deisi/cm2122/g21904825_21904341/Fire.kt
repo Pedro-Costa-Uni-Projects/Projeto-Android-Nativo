@@ -7,6 +7,7 @@ import java.util.*
 
 @Parcelize
 class Fire() : Parcelable {
+    private var isFromAPI = false
 
     private var name : String = "NaN"
     private var cc : Int = 0
@@ -37,6 +38,7 @@ class Fire() : Parcelable {
         timestamp: Long,
         comments: String,
     ) : this() {
+        this.isFromAPI = true
         this.district = district
         this.county = county
         this.parish = parish
@@ -51,6 +53,7 @@ class Fire() : Parcelable {
 
     //Constructor new fire registration
     constructor(name: String, cc: Int, district: String, timestamp: Long, photo: ByteArray?) : this() {
+        this.isFromAPI = false
         this.name = name
         this.cc = cc
         this.district = district
