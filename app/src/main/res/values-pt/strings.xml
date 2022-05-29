@@ -40,4 +40,5 @@
     <string name="error_cc_fill">Tamanho Errado</string>
     <string name="submitted">Submetido Com Sucesso</string>
     <string name="no_camera">Sem Permissões de Câmera</string>
+    <string name="nature_fire">Natureza</string>
 </resources>

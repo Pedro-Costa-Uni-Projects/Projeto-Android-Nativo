@@ -36,7 +36,6 @@ class Fire() : Parcelable {
         state: String,
         timestamp: Long,
         comments: String,
-        photo: ByteArray
     ) : this() {
         this.district = district
         this.county = county
@@ -47,7 +46,6 @@ class Fire() : Parcelable {
         this.state = state
         this.timestamp = timestamp
         this.comments = comments
-        this.photo = photo
     }
 
 
@@ -65,7 +63,7 @@ class Fire() : Parcelable {
         if (this.state == "Por Confirmar") {
             return resourcesStatic!!.getString(R.string.to_be_confirmed)
         }
-        return ""
+        return this.state
     }
 
     fun getName() : String {

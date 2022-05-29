@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         resourcesStatic = resources
         contextStatic = applicationContext
+
+        Singleton.getFromAPIaddToLocalDB()
     }
 
     override fun onStart() {

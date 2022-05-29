@@ -1,13 +1,18 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.apache.commons.codec.binary.Base64
+import retrofit2.HttpException
 import javax.security.auth.callback.Callback
 
 object Singleton {
+    private val TAG = Singleton::class.java.simpleName
     var dao = contextStatic?.let { FireDatabase.getInstance(it.applicationContext).fireDao() }
+    private var retrofit = RetrofitBuilder.getInstance("https://api-dev.fogos.pt/")
+    private var service = retrofit.create(FireService::class.java)
 
     private var listDistricts : ArrayList<String> = arrayListOf(
         resourcesStatic!!.getString(R.string.district_hint_form),
@@ -39,19 +44,33 @@ object Singleton {
         return this.listDistricts
     }
 
-    fun add(fire : Fire) {
-        fires.add(0, fire)
-    }
-
     fun getList(updateAdapter: (() -> Unit)) : ArrayList<Fire> {
         CoroutineScope(Dispatchers.IO).launch {
             val firesDao = dao?.getAll()
             fires = firesDao?.map {
-                Fire(it.name, it.cc, it.district, it.timestamp, Base64.decodeBase64(it.photo))
+                if (it.name != "NaN") { //Fogo resgistado pelo utilizador
+                    Fire(it.name, it.cc, it.district, it.timestamp, Base64.decodeBase64(it.photo))
+                } else { //Fogo da API Fogos.pt
+                    Fire(it.district, it.county, it.parish, it.operational, it.vehicles, it.aerial, it.state, it.timestamp, it.comments)
+                }
             } as ArrayList<Fire>
             updateAdapter()
         }
         return fires
+    }
+
+    fun getFromAPIaddToLocalDB() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val firesAPI = service.getAllFires().data
+                firesAPI.map {
+                    val fire = FireRoom("NaN", 0, it.district, it.concelho, it.freguesia, it.man, it.terrain, it.aerial, it.status, (it.dateTime.sec).toLong() * 1000, "${resourcesStatic!!.getString(R.string.nature_fire)} : ${it.natureza}",null)
+                    dao?.insert(fire)
+                }
+            }catch (ex: HttpException) {
+                Log.e(TAG, ex.message())
+            }
+        }
     }
 
     fun activeFires() : Int {
