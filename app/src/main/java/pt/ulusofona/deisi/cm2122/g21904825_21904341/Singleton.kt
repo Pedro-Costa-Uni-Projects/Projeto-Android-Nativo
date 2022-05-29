@@ -6,7 +6,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.apache.commons.codec.binary.Base64
 import retrofit2.HttpException
-import javax.security.auth.callback.Callback
 
 object Singleton {
     private val TAG = Singleton::class.java.simpleName
@@ -104,9 +103,5 @@ object Singleton {
 
     fun getCounty() : String {
         return county
-    }
-
-    fun getAllFires(onFinished: (ArrayList<Fire>)) {
-
     }
 }
