@@ -1,6 +1,7 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import android.content.pm.ActivityInfo
+import android.content.pm.Signature
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,21 +37,35 @@ class DashboardFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
-
-        val activePortugal = Singleton.activeFires()
-        binding.fireActiveNumber.text = activePortugal.toString()
-
-        val district = Singleton.getDistrict()
-        binding.fireActiveDistrict.text = getString(R.string.fire_active_district, district)
-
-        val activeDistrict = Singleton.activeDistrictAndCounty("d")
-        binding.fireActiveDistrictNumber.text = activeDistrict.toString()
-
-        val municipality = Singleton.getCounty()
-        binding.fireActiveMunicipality.text = getString(R.string.fire_active_municipality, municipality)
-
-        val activeMunicipality = Singleton.activeDistrictAndCounty("m")
-        binding.fireActiveMunicipalityNumber.text = activeMunicipality.toString()
+        Singleton.getList { updateVarsAndRefresh() }
 
     }
+
+    private fun updateVarsAndRefresh() {
+
+        Singleton.activeFires{
+            binding.fireActiveNumber.text = it.toString()
+        }
+
+        Singleton.getDistrict {
+            binding.fireActiveDistrict.text = getString(R.string.fire_active_district, it)
+        }
+
+        Singleton.activeDistrictAndCounty("d") {
+            binding.fireActiveDistrictNumber.text = it.toString()
+        }
+
+        Singleton.getCounty {
+            binding.fireActiveMunicipality.text = getString(R.string.fire_active_municipality, it)
+        }
+
+        Singleton.activeDistrictAndCounty("m") {
+            binding.fireActiveMunicipalityNumber.text = it.toString()
+        }
+
+        fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit();
+
+    }
+
+
 }

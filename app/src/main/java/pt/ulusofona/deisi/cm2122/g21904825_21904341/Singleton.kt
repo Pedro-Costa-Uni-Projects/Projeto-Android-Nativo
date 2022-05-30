@@ -72,11 +72,11 @@ object Singleton {
         }
     }
 
-    fun activeFires() : Int {
-        return fires.size
+    fun activeFires(update: ((Int) -> Unit)) {
+        update(fires.size)
     }
 
-    fun activeDistrictAndCounty(option : String) : Int {
+    fun activeDistrictAndCounty(option : String, update: ((Int) -> Unit)) {
         var activeDistrict = 0
         var activeCounty = 0
         for (fire in fires) {
@@ -89,19 +89,18 @@ object Singleton {
         }
 
         if (option == "d") {
-            return activeDistrict
+            update(activeDistrict)
         } else if (option == "m") {
-            return  activeCounty
+            update(activeCounty)
         }
 
-        return 0
     }
 
-    fun getDistrict() : String {
-        return district
+    fun getDistrict(update: ((String) -> Unit)) {
+        update(district)
     }
 
-    fun getCounty() : String {
-        return county
+    fun getCounty(update: ((String) -> Unit)) {
+        update(county)
     }
 }
