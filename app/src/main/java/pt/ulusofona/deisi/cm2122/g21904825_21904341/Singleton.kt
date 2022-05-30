@@ -48,7 +48,12 @@ object Singleton {
             val firesDao = dao?.getAll()
             fires = firesDao?.map {
                 if (it.name != "NaN") { //Fogo resgistado pelo utilizador
-                    Fire(it.name, it.cc, it.district, it.timestamp, Base64.decodeBase64(it.photo))
+                    if (it.photo != null) {
+                        //<3 Dedicado a Bernardo <3//
+                        Fire(it.name, it.cc, it.district, it.timestamp, Base64.decodeBase64(it.photo.toByteArray()))
+                    } else {
+                        Fire(it.name, it.cc, it.district, it.timestamp,null)
+                    }
                 } else { //Fogo da API Fogos.pt
                     Fire(it.district, it.county, it.parish, it.operational, it.vehicles, it.aerial, it.state, it.timestamp, it.comments)
                 }

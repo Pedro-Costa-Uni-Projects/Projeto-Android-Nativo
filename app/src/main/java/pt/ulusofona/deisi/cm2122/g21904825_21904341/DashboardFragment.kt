@@ -1,7 +1,6 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import android.content.pm.ActivityInfo
-import android.content.pm.Signature
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,6 +38,10 @@ class DashboardFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
         Singleton.getList { updateVarsAndRefresh() }
 
+        binding.fab.setOnClickListener {
+            fragmentManager?.beginTransaction()?.replace(R.id.frame, DashboardFragment())?.addToBackStack(null)?.commit()
+        }
+
     }
 
     private fun updateVarsAndRefresh() {
@@ -63,9 +66,6 @@ class DashboardFragment : Fragment() {
             binding.fireActiveMunicipalityNumber.text = it.toString()
         }
 
-        fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit();
-
     }
-
 
 }
