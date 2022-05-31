@@ -49,12 +49,12 @@ class MapFragment : Fragment(), OnLocationChangedListener {
         binding.map.getMapAsync { map->
             this.map = map
             FusedLocation.registerListener(this)
+            placeCamera()
         }
         return binding.root
     }
 
     override fun onLocationChanged(latitude: Double, longitude: Double) {
-        placeCamera(latitude, longitude)
         placeCityName(latitude, longitude)
         map?.addMarker(
             MarkerOptions()
@@ -62,10 +62,10 @@ class MapFragment : Fragment(), OnLocationChangedListener {
         )
     }
 
-    private fun placeCamera(latitude: Double, longitude: Double) {
+    private fun placeCamera() {
         val cameraPosition = CameraPosition.Builder()
-            .target(LatLng(latitude, longitude))
-            .zoom(12f)
+            .target(LatLng(39.490961, -7.9271299)) //coordenadas mais ou menos no meio de portugal
+            .zoom(6.8f)
             .build()
         map?.animateCamera(
             CameraUpdateFactory.newCameraPosition(cameraPosition)
@@ -74,10 +74,7 @@ class MapFragment : Fragment(), OnLocationChangedListener {
 
     private fun placeCityName(latitude: Double, longitude: Double) {
         val addresses = geocoder.getFromLocation(latitude, longitude, 5)
-        val location = addresses.first {
-            it.locality != null && it.locality.isNotEmpty()
-        }
-        binding.city.text = location.locality
+        binding.city.text = "${addresses[0].locality}, ${addresses[0].adminArea}, ${addresses[0].countryName}"
     }
 
     override fun onDestroy() {
