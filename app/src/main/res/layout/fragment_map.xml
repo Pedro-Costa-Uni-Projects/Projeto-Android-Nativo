@@ -5,13 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".MapFragment">
 
-    <ImageView
-        android:id="@+id/map_view"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/temp_map"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY">
-    </ImageView>
+        android:layout_height="match_parent">
+    </com.google.android.gms.maps.MapView>
+
+    <TextView
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="#FFFFA500"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_gravity="bottom">
+    </TextView>
 
 </FrameLayout>

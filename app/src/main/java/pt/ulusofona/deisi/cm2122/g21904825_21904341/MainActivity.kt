@@ -1,5 +1,6 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
+import android.Manifest
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
@@ -8,10 +9,14 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.allGranted
+import com.fondesa.kpermissions.extension.send
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.ActivityMainBinding
+import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
 
 var resourcesStatic : Resources? = null
 var contextStatic : Context? = null
@@ -24,12 +29,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(!screenRotated(savedInstanceState)) {
-            NavigationManager.goToDashBoard(supportFragmentManager)
+        //Perguntar por acesso a gps
+        permissionsBuilder(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION).build().send { result ->
+            if (result.allGranted()) {
+                if(!screenRotated(savedInstanceState)) {
+                    NavigationManager.goToDashBoard(supportFragmentManager)
+                }
+            } else {
+                finish()
+            }
         }
 
         resourcesStatic = resources
         contextStatic = applicationContext
+
+        //Iniciar a busca da localização
+        FusedLocation.start(this)
 
         //Se tem ligação a internet limpa a bd
         // deixando apenas os fogos inseridos manualmente,
