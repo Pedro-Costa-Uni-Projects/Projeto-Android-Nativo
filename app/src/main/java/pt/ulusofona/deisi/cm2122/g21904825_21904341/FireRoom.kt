@@ -3,7 +3,6 @@ package pt.ulusofona.deisi.cm2122.g21904825_21904341
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 @Entity(tableName = "fire")
 data class FireRoom (

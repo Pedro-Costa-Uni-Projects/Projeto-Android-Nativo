@@ -2,7 +2,6 @@ package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import android.Manifest
 import android.app.Activity
-import android.app.SearchableInfo
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap

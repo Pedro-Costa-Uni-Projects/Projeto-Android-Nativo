@@ -3,7 +3,6 @@ package pt.ulusofona.deisi.cm2122.g21904825_21904341
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities.*
-import android.net.TransportInfo
 import android.util.Log
 
 object ConnectivityUtil {

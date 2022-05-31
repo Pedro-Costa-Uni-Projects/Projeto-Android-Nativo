@@ -1,7 +1,6 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 

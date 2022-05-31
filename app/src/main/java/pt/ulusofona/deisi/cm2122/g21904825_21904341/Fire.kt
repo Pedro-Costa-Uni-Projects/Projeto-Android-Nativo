@@ -1,6 +1,5 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
-import android.graphics.Bitmap
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.util.*
