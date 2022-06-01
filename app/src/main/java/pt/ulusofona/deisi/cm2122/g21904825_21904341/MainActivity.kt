@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity(), OnLocationChangedListener {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION).build().send { result ->
             if (result.allGranted()) {
+                //Iniciar a busca da localização
+                FusedLocation.start(this)
                 if(!screenRotated(savedInstanceState)) {
                     NavigationManager.goToDashBoard(supportFragmentManager)
                 }
@@ -47,9 +49,6 @@ class MainActivity : AppCompatActivity(), OnLocationChangedListener {
 
         resourcesStatic = resources
         contextStatic = applicationContext
-
-        //Iniciar a busca da localização
-        FusedLocation.start(this)
 
         //Se tem ligação a internet limpa a bd
         // deixando apenas os fogos inseridos manualmente,
