@@ -4,18 +4,19 @@
 
 ### Video:
 
-### Autoavaliação Parte 1: 17
+### Autoavaliação:
+    - Parte 1: 17
+    - Parte 2: 13
 
-### Autoavaliação Parte 2: 
-
-### Funcionalidades Parte 1:
+### Funcionalidades:
+#### Parte 1:
 <p align="center">
   <img src="images/tabela.png">
 </p>
 
-### Funcionalidades Parte 2:
+#### Parte 2:
 <p align="center">
-  <img src="">
+  <img src="images/tabela2.png">
 </p>
 
 ### Screenshots:
