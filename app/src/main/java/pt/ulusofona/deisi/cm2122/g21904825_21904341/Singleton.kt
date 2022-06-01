@@ -18,6 +18,8 @@ object Singleton {
     private var county : String = " "
     var risco = ""
 
+    fun getFires() : ArrayList<Fire> {return fires}
+
     fun getList(updateAdapter: (() -> Unit)) : ArrayList<Fire> {
         CoroutineScope(Dispatchers.IO).launch {
             val firesDao = dao?.getAll()

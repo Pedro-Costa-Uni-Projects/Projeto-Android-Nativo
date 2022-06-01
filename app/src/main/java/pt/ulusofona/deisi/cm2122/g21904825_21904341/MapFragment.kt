@@ -1,27 +1,21 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import android.content.pm.ActivityInfo
-import android.location.Geocoder
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.FragmentMapBinding
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
-import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.OnLocationChangedListener
-import java.util.*
 
 
-class MapFragment : Fragment(), OnLocationChangedListener {
+class MapFragment : Fragment() {
     private lateinit var binding: FragmentMapBinding
-    private lateinit var geocoder: Geocoder
     private var map: GoogleMap? = null
 
 
@@ -44,23 +38,22 @@ class MapFragment : Fragment(), OnLocationChangedListener {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_map, container, false)
         binding = FragmentMapBinding.bind(view)
-        geocoder = Geocoder(context, Locale.getDefault())
         binding.map.onCreate(savedInstanceState)
         binding.map.getMapAsync { map->
             this.map = map
-            FusedLocation.registerListener(this)
             placeCamera()
+            for (fire in Singleton.getFires()) {
+                map.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(fire.getLatitude(), fire.getLongitude()))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.fire))
+
+                )
+            }
         }
         return binding.root
     }
 
-    override fun onLocationChanged(latitude: Double, longitude: Double) {
-        placeCityName(latitude, longitude)
-        map?.addMarker(
-            MarkerOptions()
-                .position(LatLng(latitude, longitude))
-        )
-    }
 
     private fun placeCamera() {
         val cameraPosition = CameraPosition.Builder()
@@ -70,11 +63,6 @@ class MapFragment : Fragment(), OnLocationChangedListener {
         map?.animateCamera(
             CameraUpdateFactory.newCameraPosition(cameraPosition)
         )
-    }
-
-    private fun placeCityName(latitude: Double, longitude: Double) {
-        val addresses = geocoder.getFromLocation(latitude, longitude, 5)
-        binding.city.text = "${addresses[0].locality}, ${addresses[0].adminArea}, ${addresses[0].countryName}"
     }
 
     override fun onDestroy() {

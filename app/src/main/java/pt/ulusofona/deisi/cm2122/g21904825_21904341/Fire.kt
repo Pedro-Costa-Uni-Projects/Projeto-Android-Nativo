@@ -137,4 +137,16 @@ class Fire() : Parcelable {
         return this.timestamp
     }
 
+    fun getLatitude() : Double {
+        return this.latitude
+    }
+
+    fun getLongitude() : Double {
+        return this.longitude
+    }
+
+    fun getFullLocation() : String {
+        return this.district + ", " + this.county
+    }
+
 }
