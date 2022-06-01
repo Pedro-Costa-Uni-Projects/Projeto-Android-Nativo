@@ -24,6 +24,9 @@ class Fire() : Parcelable {
     private var comments : String = "NaN"
     private var photo : ByteArray? = null
 
+    private var latitude : Double = 0.0
+    private var longitude : Double = 0.0
+
 
     //Constructor API
     constructor(
@@ -36,6 +39,8 @@ class Fire() : Parcelable {
         state: String,
         timestamp: Long,
         comments: String,
+        latitude: Double,
+        longitude: Double,
     ) : this() {
         this.isFromAPI = true
         this.district = district
@@ -47,18 +52,32 @@ class Fire() : Parcelable {
         this.state = state
         this.timestamp = timestamp
         this.comments = comments
+        this.latitude = latitude
+        this.longitude = longitude
     }
 
 
     //Constructor new fire registration
-    constructor(name: String, cc: Int, district: String, timestamp: Long, photo: ByteArray?) : this() {
+    constructor(
+        name: String,
+        cc: Int,
+        district: String,
+        county: String,
+        timestamp: Long,
+        photo: ByteArray?,
+        latitude: Double,
+        longitude: Double,
+    ) : this() {
         this.isFromAPI = false
         this.name = name
         this.cc = cc
+        this.county = county
         this.district = district
         this.photo = photo
         this.timestamp = timestamp
         this.state = "Por Confirmar"
+        this.latitude = latitude
+        this.longitude = longitude
     }
 
     fun getState() : String {
@@ -82,12 +101,12 @@ class Fire() : Parcelable {
         return this.cc.toString()
     }
 
-    fun getDistrict() : String {
-        return this.district
-    }
-
     fun getCounty() : String {
         return this.county
+    }
+
+    fun getDistrict() : String {
+        return this.district
     }
 
     fun getParish() : String {

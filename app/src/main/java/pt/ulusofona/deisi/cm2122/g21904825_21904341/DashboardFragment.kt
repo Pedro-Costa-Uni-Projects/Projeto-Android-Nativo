@@ -1,6 +1,7 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import android.content.pm.ActivityInfo
+import android.location.Geocoder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,9 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.FragmentDashboardBinding
+import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
+import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.OnLocationChangedListener
+import java.util.*
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), OnLocationChangedListener {
     private lateinit var binding: FragmentDashboardBinding
+    private lateinit var geocoder: Geocoder
 
     //Para não rodar o ecrã
     override fun onResume() {
@@ -30,13 +35,15 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         binding = FragmentDashboardBinding.bind(view)
+        geocoder = Geocoder(context, Locale.getDefault())
+        FusedLocation.registerListener(this)
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
-        Singleton.getList { updateVarsAndRefresh() }
+        Singleton.getList {  }
 
         binding.fab.setOnClickListener {
             fragmentManager?.beginTransaction()?.replace(R.id.frame, DashboardFragment())?.addToBackStack(null)?.commit()
@@ -44,7 +51,19 @@ class DashboardFragment : Fragment() {
 
     }
 
-    private fun updateVarsAndRefresh() {
+    override fun onLocationChanged(latitude: Double, longitude: Double) {
+        val addresses = geocoder.getFromLocation(latitude, longitude, 5)
+
+        Singleton.setDistrict(addresses[0].adminArea)
+        Singleton.setCounty(addresses[0].locality)
+
+        Singleton.activeDistrictAndCounty("d") {
+            binding.fireActiveDistrictNumber.text = it.toString()
+        }
+
+        Singleton.activeDistrictAndCounty("m") {
+            binding.fireActiveMunicipalityNumber.text = it.toString()
+        }
 
         Singleton.activeFires{
             binding.fireActiveNumber.text = it.toString()
@@ -54,16 +73,8 @@ class DashboardFragment : Fragment() {
             binding.fireActiveDistrict.text = getString(R.string.fire_active_district, it)
         }
 
-        Singleton.activeDistrictAndCounty("d") {
-            binding.fireActiveDistrictNumber.text = it.toString()
-        }
-
         Singleton.getCounty {
             binding.fireActiveMunicipality.text = getString(R.string.fire_active_municipality, it)
-        }
-
-        Singleton.activeDistrictAndCounty("m") {
-            binding.fireActiveMunicipalityNumber.text = it.toString()
         }
 
     }

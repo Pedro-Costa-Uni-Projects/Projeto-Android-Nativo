@@ -42,8 +42,7 @@
     <string name="cc_form" translatable="false">CC *</string>
     <string name="cc_hint_form" translatable="false">12345678</string>
 
-    <string name="district_form">District *</string>
-    <string name="district_hint_form">Choose An Option</string>
+    <string name="localization_form">Localization *</string>
 
     <string name="date_form">Date and Hour *</string>
     <string name="photo_form">Photo</string>

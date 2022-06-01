@@ -10,5 +10,7 @@ data class ActiveFiresData(
     val status: String,
     val dateTime : DateTime,
     val natureza: String,
+    val lat: Double,
+    val lng: Double,
 
 )

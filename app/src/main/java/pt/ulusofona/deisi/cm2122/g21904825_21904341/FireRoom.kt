@@ -20,6 +20,9 @@ data class FireRoom (
     @ColumnInfo (name = "timestamp") val timestamp: Long,
     @ColumnInfo (name = "comments") val comments: String,
     @ColumnInfo (name = "photo") val photo: String?,
+    @ColumnInfo (name = "latitude") val latitude: Double,
+    @ColumnInfo (name = "longitude") val longitude: Double,
+
 ) {
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

@@ -13,35 +13,9 @@ object Singleton {
     private var retrofit = RetrofitBuilder.getInstance("https://api-dev.fogos.pt/")
     private var service = retrofit.create(FireService::class.java)
 
-    private var listDistricts : ArrayList<String> = arrayListOf(
-        resourcesStatic!!.getString(R.string.district_hint_form),
-        "Aveiro",
-        "Beja",
-        "Braga",
-        "Bragança",
-        "Castelo Branco",
-        "Coimbra",
-        "Évora",
-        "Faro",
-        "Guarda",
-        "Leiria",
-        "Lisboa",
-        "Portalegre",
-        "Porto",
-        "Santarém",
-        "Setúbal",
-        "Viana do Castelo",
-        "Vila Real",
-        "Viseu"
-    )
-
     private var fires : ArrayList<Fire> = ArrayList()
-    private var district : String = "Setúbal" //Pre preenchido
-    private var county : String = "Barreiro" //Pre preenchido
-
-    fun getListDistricts() : ArrayList<String> {
-        return this.listDistricts
-    }
+    private var district : String = " "
+    private var county : String = " "
 
     fun getList(updateAdapter: (() -> Unit)) : ArrayList<Fire> {
         CoroutineScope(Dispatchers.IO).launch {
@@ -49,13 +23,13 @@ object Singleton {
             fires = firesDao?.map {
                 if (it.name != "NaN") { //Fogo resgistado pelo utilizador
                     if (it.photo != null) {
-                        //<3 Dedicado a Bernardo <3//
-                        Fire(it.name, it.cc, it.district, it.timestamp, Base64.decodeBase64(it.photo.toByteArray()))
+                        //<3 Dedicado ao Bernardo <3//
+                        Fire(it.name, it.cc, it.district, it.county, it.timestamp, Base64.decodeBase64(it.photo.toByteArray()), it.latitude, it.longitude)
                     } else {
-                        Fire(it.name, it.cc, it.district, it.timestamp,null)
+                        Fire(it.name, it.cc, it.district, it.county, it.timestamp,null, it.latitude, it.longitude)
                     }
                 } else { //Fogo da API Fogos.pt
-                    Fire(it.district, it.county, it.parish, it.operational, it.vehicles, it.aerial, it.state, it.timestamp, it.comments)
+                    Fire(it.district, it.county, it.parish, it.operational, it.vehicles, it.aerial, it.state, it.timestamp, it.comments, it.latitude, it.longitude)
                 }
             } as ArrayList<Fire>
             updateAdapter()
@@ -68,7 +42,7 @@ object Singleton {
             try {
                 val firesAPI = service.getAllFires().data
                 firesAPI.map {
-                    val fire = FireRoom(true,"NaN", 0, it.district, it.concelho, it.freguesia, it.man, it.terrain, it.aerial, it.status, (it.dateTime.sec).toLong() * 1000, "${resourcesStatic!!.getString(R.string.nature_fire)} : ${it.natureza}",null)
+                    val fire = FireRoom(true,"NaN", 0, it.district, it.concelho, it.freguesia, it.man, it.terrain, it.aerial, it.status, (it.dateTime.sec).toLong() * 1000, "${resourcesStatic!!.getString(R.string.nature_fire)} : ${it.natureza}",null, it.lat, it.lng)
                     dao?.insert(fire)
                 }
             }catch (ex: HttpException) {
@@ -107,5 +81,13 @@ object Singleton {
 
     fun getCounty(update: ((String) -> Unit)) {
         update(county)
+    }
+
+    fun setDistrict(district : String) {
+        this.district = district
+    }
+
+    fun setCounty(county : String) {
+        this.county = county
     }
 }

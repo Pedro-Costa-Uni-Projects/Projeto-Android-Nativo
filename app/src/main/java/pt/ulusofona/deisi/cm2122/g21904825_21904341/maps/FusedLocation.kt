@@ -9,7 +9,7 @@ import com.google.android.gms.location.*
 @SuppressLint("MissingPermission")
 class FusedLocation private constructor(context: Context) : LocationCallback() {
     private val TAG = FusedLocation::class.java.simpleName
-    private val TIME_BETWEEN_UPDATES = 20 * 1000L
+    private val TIME_BETWEEN_UPDATES = 2 * 1000L
     private var client = FusedLocationProviderClient(context)
     private var locationRequest = LocationRequest.create().apply {
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY

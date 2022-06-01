@@ -21,8 +21,7 @@
     <string name="info_not_available">Informação Não Disponível</string>
     <string name="name_form">Nome *</string>
     <string name="name_hint_form">Nome e Apelido</string>
-    <string name="district_form">Distrito *</string>
-    <string name="district_hint_form">Escolha Uma Opção</string>
+    <string name="localization_form">Localização *</string>
     <string name="date_form">Data e Hora *</string>
     <string name="photo_form">Foto</string>
     <string name="required_fields">* campos obrigatórios</string>

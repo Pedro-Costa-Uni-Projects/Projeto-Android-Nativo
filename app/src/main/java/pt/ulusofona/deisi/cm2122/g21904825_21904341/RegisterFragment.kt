@@ -6,8 +6,10 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.location.Geocoder
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,16 +30,22 @@ import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.FragmentRegister
 import java.io.ByteArrayOutputStream
 import java.util.*
 import org.apache.commons.codec.binary.Base64
+import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
+import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.OnLocationChangedListener
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(), OnLocationChangedListener {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var geocoder: Geocoder
 
     private var name = ""
     private var cc = 0
-    private var district = ""
     private var timestamp = 0L
     private var photo : String? = null
+    private var latitude : Double = 0.0
+    private var longitude : Double = 0.0
+    private var district : String = ""
+    private var county : String = ""
 
     //Para não rodar o ecrã
     override fun onResume() {
@@ -60,6 +68,8 @@ class RegisterFragment : Fragment() {
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_register, container, false)
         binding = FragmentRegisterBinding.bind(view)
+        geocoder = Geocoder(context, Locale.getDefault())
+        FusedLocation.registerListener(this)
 
         //Tem que ser aqui se não da erro
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -92,12 +102,6 @@ class RegisterFragment : Fragment() {
         binding.date.text = getData(timestamp)
         //Data pré preenchida
 
-        //Dropdown
-        val items = Singleton.getListDistricts()
-        val adapter: ArrayAdapter<String>? = this.context?.let { ArrayAdapter<String>(it, android.R.layout.simple_spinner_dropdown_item, items) }
-        binding.district.adapter = adapter
-        //Dropdown
-
         //Submeter
         binding.buttonSubmit.setOnClickListener {
             //name
@@ -117,17 +121,9 @@ class RegisterFragment : Fragment() {
                 cc = binding.cc.editableText.toString().toInt()
             }
 
-            //district
-            district = binding.district.selectedItem.toString()
-            if (district == getString(R.string.district_hint_form)) {
-                district = ""
-                val errorText : TextView = binding.district.selectedView as TextView
-                errorText.error = getString(R.string.error_empty_fill)
-            }
-
             //Submit
             if (name != "" && cc != 0 && district != "") {
-                val fire = FireRoom(false, name, cc, district, "NaN", "NaN", 0, 0, 0, "NaN", timestamp, "NaN", photo)
+                val fire = FireRoom(false, name, cc, district, county, "NaN", 0, 0, 0, "NaN", timestamp, "NaN", photo, latitude, longitude)
 
                 CoroutineScope(Dispatchers.IO).launch {
                     Singleton.dao?.insert(fire)
@@ -153,5 +149,15 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.no_camera), Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    override fun onLocationChanged(latitude: Double, longitude: Double) {
+        val addresses = geocoder.getFromLocation(latitude, longitude, 5)
+        this.latitude = latitude
+        this.longitude = longitude
+        this.district = addresses[0].adminArea
+        this.county = addresses[0].locality
+        binding.localization.text = "${district}, ${county}"
+
     }
 }

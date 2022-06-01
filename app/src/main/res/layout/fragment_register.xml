@@ -78,30 +78,33 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_district"
+                android:id="@+id/layout_localization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="20dp">
 
                 <TextView
-                    android:id="@+id/label_district"
+                    android:id="@+id/label_localization"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:text="@string/district_form">
+                    android:text="@string/localization_form">
 
                 </TextView>
 
-                <Spinner
-                    android:id="@+id/district"
+                <TextView
+                    android:id="@+id/localization"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown">
+                    android:textColor="@color/grey"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
+                    android:text="">
 
-                </Spinner>
+                </TextView>
 
             </LinearLayout>
 
