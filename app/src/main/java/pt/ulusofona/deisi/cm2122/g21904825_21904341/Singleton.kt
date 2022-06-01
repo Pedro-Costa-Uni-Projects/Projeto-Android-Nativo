@@ -16,6 +16,7 @@ object Singleton {
     private var fires : ArrayList<Fire> = ArrayList()
     private var district : String = " "
     private var county : String = " "
+    var risco = ""
 
     fun getList(updateAdapter: (() -> Unit)) : ArrayList<Fire> {
         CoroutineScope(Dispatchers.IO).launch {
@@ -48,6 +49,17 @@ object Singleton {
             }catch (ex: HttpException) {
                 Log.e(TAG, ex.message())
             }
+        }
+    }
+
+    fun getRisk(update: (() -> Unit)) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                risco = service.getRisk(county).data
+            }catch (ex: HttpException) {
+                Log.e(TAG, ex.message())
+            }
+            update()
         }
     }
 

@@ -3,8 +3,8 @@ package pt.ulusofona.deisi.cm2122.g21904825_21904341
 import android.Manifest
 import android.content.Context
 import android.content.res.Resources
+import android.location.Geocoder
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -17,12 +17,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.ActivityMainBinding
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
+import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.OnLocationChangedListener
+import java.util.*
 
 var resourcesStatic : Resources? = null
 var contextStatic : Context? = null
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnLocationChangedListener {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var geocoder: Geocoder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +67,9 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         setSupportActionBar(binding.toolbar)
         setupDrawerMenu()
-        timer.start()
+        geocoder = Geocoder(this.applicationContext, Locale.getDefault())
+        FusedLocation.registerListener(this)
+
     }
 
     private fun screenRotated(savedInstanceState: Bundle?) : Boolean {
@@ -124,39 +129,41 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
-    
-    //Timer
-    private val timer = object : CountDownTimer(100000,20000) {
-        var count = 0
-        override fun onTick(time: Long) {
-            when(count) {
-                0 -> {
+
+    //Risco
+    override fun onLocationChanged(latitude: Double, longitude: Double) {
+        val addresses = geocoder.getFromLocation(latitude, longitude, 5)
+
+        Singleton.setDistrict(addresses[0].adminArea)
+        Singleton.setCounty(addresses[0].locality)
+
+        Singleton.getRisk {
+
+            //Dedicado ao Bernardo
+            when(Singleton.risco.split("\r")[1].split(" - ")[1].split(",")[0]) {
+                "Reduzido" -> {
                     binding.risk.setBackgroundColor(getColor(R.color.reduced))
                     binding.risk.text = getString(R.string.reduced)
                 }
-                1 -> {
+                "Moderado" -> {
                     binding.risk.setBackgroundColor(getColor(R.color.moderate))
                     binding.risk.text = getString(R.string.moderate)
                 }
-                2 -> {
+                "Elevado" -> {
                     binding.risk.setBackgroundColor(getColor(R.color.high))
                     binding.risk.text = getString(R.string.high)
                 }
-                3 -> {
+                "Muito Elevado" -> {
                     binding.risk.setBackgroundColor(getColor(R.color.very_high))
                     binding.risk.text = getString(R.string.very_high)
                 }
-                4 -> {
+                "Máximo" -> {
                     binding.risk.setBackgroundColor(getColor(R.color.maximum))
                     binding.risk.text = getString(R.string.maximum)
                 }
-            }
-            count++
-        }
 
-        override fun onFinish() {
-            count = 0
-            start()
+            }
+
         }
     }
 
