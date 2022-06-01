@@ -1,6 +1,7 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import android.os.Parcelable
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
@@ -143,10 +144,6 @@ class Fire() : Parcelable {
 
     fun getLongitude() : Double {
         return this.longitude
-    }
-
-    fun getFullLocation() : String {
-        return this.district + ", " + this.county
     }
 
 }

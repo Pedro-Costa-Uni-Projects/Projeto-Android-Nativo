@@ -1,6 +1,7 @@
 package pt.ulusofona.deisi.cm2122.g21904825_21904341
 
 import android.util.Log
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -103,5 +104,14 @@ object Singleton {
 
     fun setCounty(county : String) {
         this.county = county
+    }
+
+    fun getFireFromPosition(ll: LatLng) : Fire? {
+        for (fire in fires) {
+            if (LatLng(fire.getLatitude(), fire.getLongitude()) == ll) {
+                return fire
+            }
+        }
+        return null
     }
 }

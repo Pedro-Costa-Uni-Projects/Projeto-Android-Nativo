@@ -9,12 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.*
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.FragmentMapBinding
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
 
 
-class MapFragment : Fragment() {
+class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     private lateinit var binding: FragmentMapBinding
     private var map: GoogleMap? = null
 
@@ -41,7 +42,6 @@ class MapFragment : Fragment() {
         binding.map.onCreate(savedInstanceState)
         binding.map.getMapAsync { map->
             this.map = map
-            placeCamera()
             for (fire in Singleton.getFires()) {
                 map.addMarker(
                     MarkerOptions()
@@ -50,10 +50,22 @@ class MapFragment : Fragment() {
 
                 )
             }
+            placeCamera()
+            map.setOnMarkerClickListener (this)
         }
         return binding.root
     }
 
+    override fun onMarkerClick(p0: Marker): Boolean {
+        val fire = Singleton.getFireFromPosition(LatLng(p0.position.latitude, p0.position.longitude))
+        if (fire != null) {
+            NavigationManager.goToDetails(
+                parentFragmentManager, fire
+            )
+            return true
+        }
+        return false
+    }
 
     private fun placeCamera() {
         val cameraPosition = CameraPosition.Builder()
