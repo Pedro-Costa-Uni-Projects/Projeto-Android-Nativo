@@ -40,4 +40,5 @@
     <string name="submitted">Submetido Com Sucesso</string>
     <string name="no_camera">Sem Permissões de Câmera</string>
     <string name="nature_fire">Natureza</string>
+    <string name="all">Todos os Distritos</string>
 </resources>

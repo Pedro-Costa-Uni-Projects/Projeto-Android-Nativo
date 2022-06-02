@@ -5,10 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".MapFragment">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.google.android.gms.maps.MapView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/filter_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </Spinner>
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20">
+        </com.google.android.gms.maps.MapView>
+
+
+    </LinearLayout>
 
 </FrameLayout>

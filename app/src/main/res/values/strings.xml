@@ -64,6 +64,7 @@
     <string name="submitted">Submitted With Success</string>
     <string name="no_camera">No Camera Permissions</string>
     <string name="nature_fire">Nature</string>
+    <string name="all">All Districts</string>
 
 
 </resources>
