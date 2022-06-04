@@ -169,6 +169,7 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
                 this.county = addresses[0].locality
             } catch (ex2: NullPointerException) {
                 Log.e(TAG, ex2.toString())
+                this.county = addresses[0].adminArea
             }
 
         } catch (ex: IOException) {

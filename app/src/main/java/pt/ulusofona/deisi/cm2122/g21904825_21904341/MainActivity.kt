@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity(), OnLocationChangedListener {
                 Singleton.setCounty(addresses[0].locality)
             } catch (ex2: NullPointerException) {
                 Log.e(TAG, ex2.toString())
-                ///////////////////////////////////////////////////////////////////
+                Singleton.setCounty(addresses[0].adminArea)
             }
 
         } catch (ex: IOException) {
