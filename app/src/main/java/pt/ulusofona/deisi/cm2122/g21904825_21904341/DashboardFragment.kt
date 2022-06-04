@@ -3,6 +3,7 @@ package pt.ulusofona.deisi.cm2122.g21904825_21904341
 import android.content.pm.ActivityInfo
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,14 @@ import androidx.appcompat.app.AppCompatActivity
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.FragmentDashboardBinding
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.OnLocationChangedListener
+import java.io.IOException
 import java.util.*
 
 class DashboardFragment : Fragment(), OnLocationChangedListener {
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var geocoder: Geocoder
+
+    private val TAG = DashboardFragment::class.java.simpleName
 
     //Para não rodar o ecrã
     override fun onResume() {
@@ -52,10 +56,15 @@ class DashboardFragment : Fragment(), OnLocationChangedListener {
     }
 
     override fun onLocationChanged(latitude: Double, longitude: Double) {
-        val addresses = geocoder.getFromLocation(latitude, longitude, 5)
+        try {
+            val addresses = geocoder.getFromLocation(latitude, longitude, 5)
 
-        Singleton.setDistrict(addresses[0].adminArea)
-        Singleton.setCounty(addresses[0].locality)
+            Singleton.setDistrict(addresses[0].adminArea)
+            Singleton.setCounty(addresses[0].locality)
+
+        } catch (ex: IOException) {
+            Log.e(TAG, ex.toString())
+        }
 
         Singleton.activeDistrictAndCounty("d") {
             binding.fireActiveDistrictNumber.text = it.toString()

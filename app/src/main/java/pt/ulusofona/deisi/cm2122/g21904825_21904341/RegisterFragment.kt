@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory
 import android.location.Geocoder
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,11 +30,14 @@ import java.util.*
 import org.apache.commons.codec.binary.Base64
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.OnLocationChangedListener
+import java.io.IOException
 
 class RegisterFragment : Fragment(), OnLocationChangedListener {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private lateinit var geocoder: Geocoder
+
+    private val TAG = RegisterFragment::class.java.simpleName
 
     private var name = ""
     private var cc = 0
@@ -149,11 +153,15 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
     }
 
     override fun onLocationChanged(latitude: Double, longitude: Double) {
-        val addresses = geocoder.getFromLocation(latitude, longitude, 5)
-        this.latitude = latitude
-        this.longitude = longitude
-        this.district = addresses[0].adminArea
-        this.county = addresses[0].locality
+        try {
+            val addresses = geocoder.getFromLocation(latitude, longitude, 5)
+            this.latitude = latitude
+            this.longitude = longitude
+            this.district = addresses[0].adminArea
+            this.county = addresses[0].locality
+        } catch (ex: IOException) {
+            Log.e(TAG, ex.toString())
+        }
         binding.localization.text = "${district}, ${county}"
 
     }
