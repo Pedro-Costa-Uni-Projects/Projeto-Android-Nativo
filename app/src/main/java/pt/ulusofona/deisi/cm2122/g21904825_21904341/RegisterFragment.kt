@@ -122,6 +122,11 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
                 cc = binding.cc.editableText.toString().toInt()
             }
 
+            //localização
+            if (binding.localization.text == "") {
+                binding.localization.error = getString(R.string.no_data)
+            }
+
             //Submit
             if (name != "" && cc != 0 && district != "") {
                 val fire = FireRoom(false, name, cc, district, county, "NaN", 0, 0, 0, "NaN", timestamp, "NaN", photo, latitude, longitude)

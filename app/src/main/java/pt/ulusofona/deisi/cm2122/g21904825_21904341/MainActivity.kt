@@ -139,28 +139,30 @@ class MainActivity : AppCompatActivity(), OnLocationChangedListener {
         Singleton.getRisk {
 
             //Dedicado ao Bernardo
-            when(Singleton.risco.split("\r")[1].split(" - ")[1].split(",")[0]) {
-                "Reduzido" -> {
-                    binding.risk.setBackgroundColor(getColor(R.color.reduced))
-                    binding.risk.text = getString(R.string.reduced)
-                }
-                "Moderado" -> {
-                    binding.risk.setBackgroundColor(getColor(R.color.moderate))
-                    binding.risk.text = getString(R.string.moderate)
-                }
-                "Elevado" -> {
-                    binding.risk.setBackgroundColor(getColor(R.color.high))
-                    binding.risk.text = getString(R.string.high)
-                }
-                "Muito Elevado" -> {
-                    binding.risk.setBackgroundColor(getColor(R.color.very_high))
-                    binding.risk.text = getString(R.string.very_high)
-                }
-                "Máximo" -> {
-                    binding.risk.setBackgroundColor(getColor(R.color.maximum))
-                    binding.risk.text = getString(R.string.maximum)
-                }
+            if (Singleton.risco != "") {
+                when(Singleton.risco.split("\r")[1].split(" - ")[1].split(",")[0]) {
+                    "Reduzido" -> {
+                        binding.risk.setBackgroundColor(getColor(R.color.reduced))
+                        binding.risk.text = getString(R.string.reduced)
+                    }
+                    "Moderado" -> {
+                        binding.risk.setBackgroundColor(getColor(R.color.moderate))
+                        binding.risk.text = getString(R.string.moderate)
+                    }
+                    "Elevado" -> {
+                        binding.risk.setBackgroundColor(getColor(R.color.high))
+                        binding.risk.text = getString(R.string.high)
+                    }
+                    "Muito Elevado" -> {
+                        binding.risk.setBackgroundColor(getColor(R.color.very_high))
+                        binding.risk.text = getString(R.string.very_high)
+                    }
+                    "Máximo" -> {
+                        binding.risk.setBackgroundColor(getColor(R.color.maximum))
+                        binding.risk.text = getString(R.string.maximum)
+                    }
 
+                }
             }
 
         }
