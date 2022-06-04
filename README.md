@@ -6,7 +6,7 @@
 
 ### Autoavaliação:
     - Parte 1: 17
-    - Parte 2: 13
+    - Parte 2: 14
 
 ### Funcionalidades:
 #### Parte 1:

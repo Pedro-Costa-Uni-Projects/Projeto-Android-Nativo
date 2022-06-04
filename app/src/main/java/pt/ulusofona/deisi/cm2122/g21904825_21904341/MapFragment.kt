@@ -117,15 +117,15 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener, AdapterView.OnI
 
                 )
             }
-            //Zoom para o distrito em especifico
-            val cameraPosition = CameraPosition.Builder()
-                .target(Districts.listCords[position-1])
-                .zoom(8f)
-                .build()
-            map?.animateCamera(
-                CameraUpdateFactory.newCameraPosition(cameraPosition)
-            )
         }
+        //Zoom para o distrito em especifico
+        val cameraPosition = CameraPosition.Builder()
+            .target(Districts.listCords[position-1])
+            .zoom(8f)
+            .build()
+        map?.animateCamera(
+            CameraUpdateFactory.newCameraPosition(cameraPosition)
+        )
     }
 
 }
