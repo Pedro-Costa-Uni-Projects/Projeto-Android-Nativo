@@ -13,6 +13,7 @@ import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.FragmentDashboar
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.OnLocationChangedListener
 import java.io.IOException
+import java.lang.NullPointerException
 import java.util.*
 
 class DashboardFragment : Fragment(), OnLocationChangedListener {
@@ -59,8 +60,12 @@ class DashboardFragment : Fragment(), OnLocationChangedListener {
         try {
             val addresses = geocoder.getFromLocation(latitude, longitude, 5)
 
-            Singleton.setDistrict(addresses[0].adminArea)
-            Singleton.setCounty(addresses[0].locality)
+            try {
+                Singleton.setDistrict(addresses[0].adminArea)
+                Singleton.setCounty(addresses[0].locality)
+            } catch (ex2: NullPointerException) {
+                Log.e(TAG, ex2.toString())
+            }
 
         } catch (ex: IOException) {
             Log.e(TAG, ex.toString())

@@ -31,6 +31,7 @@ import org.apache.commons.codec.binary.Base64
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.OnLocationChangedListener
 import java.io.IOException
+import java.lang.NullPointerException
 
 class RegisterFragment : Fragment(), OnLocationChangedListener {
     private lateinit var binding: FragmentRegisterBinding
@@ -162,8 +163,14 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
             val addresses = geocoder.getFromLocation(latitude, longitude, 5)
             this.latitude = latitude
             this.longitude = longitude
-            this.district = addresses[0].adminArea
-            this.county = addresses[0].locality
+
+            try {
+                this.district = addresses[0].adminArea
+                this.county = addresses[0].locality
+            } catch (ex2: NullPointerException) {
+                Log.e(TAG, ex2.toString())
+            }
+
         } catch (ex: IOException) {
             Log.e(TAG, ex.toString())
         }

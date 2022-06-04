@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,9 @@ import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.databinding.ActivityMainBinding
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.FusedLocation
 import pt.ulusofona.deisi.cm2122.g21904825_21904341.maps.OnLocationChangedListener
+import java.io.IOException
+import java.lang.IndexOutOfBoundsException
+import java.lang.NullPointerException
 import java.util.*
 
 var resourcesStatic : Resources? = null
@@ -26,6 +30,8 @@ var contextStatic : Context? = null
 class MainActivity : AppCompatActivity(), OnLocationChangedListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var geocoder: Geocoder
+
+    private var TAG = MainActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,15 +137,24 @@ class MainActivity : AppCompatActivity(), OnLocationChangedListener {
 
     //Risco
     override fun onLocationChanged(latitude: Double, longitude: Double) {
-        val addresses = geocoder.getFromLocation(latitude, longitude, 5)
+        try {
+            val addresses = geocoder.getFromLocation(latitude, longitude, 5)
 
-        Singleton.setDistrict(addresses[0].adminArea)
-        Singleton.setCounty(addresses[0].locality)
+            try {
+                Singleton.setDistrict(addresses[0].adminArea)
+                Singleton.setCounty(addresses[0].locality)
+            } catch (ex2: NullPointerException) {
+                Log.e(TAG, ex2.toString())
+                ///////////////////////////////////////////////////////////////////
+            }
 
+        } catch (ex: IOException) {
+            Log.e(TAG, ex.toString())
+        }
         Singleton.getRisk {
 
             //Dedicado ao Bernardo
-            if (Singleton.risco != "") {
+            try {
                 when(Singleton.risco.split("\r")[1].split(" - ")[1].split(",")[0]) {
                     "Reduzido" -> {
                         binding.risk.setBackgroundColor(getColor(R.color.reduced))
@@ -163,7 +178,11 @@ class MainActivity : AppCompatActivity(), OnLocationChangedListener {
                     }
 
                 }
+
+            } catch (ex: IndexOutOfBoundsException) {
+                Log.e(TAG, Singleton.risco)
             }
+
 
         }
     }
