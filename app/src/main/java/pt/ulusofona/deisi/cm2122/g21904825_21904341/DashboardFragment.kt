@@ -36,6 +36,11 @@ class DashboardFragment : Fragment(), OnLocationChangedListener {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        FusedLocation.unregisterListener(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)

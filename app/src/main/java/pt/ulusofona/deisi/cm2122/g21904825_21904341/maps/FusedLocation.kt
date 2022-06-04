@@ -41,6 +41,10 @@ class FusedLocation private constructor(context: Context) : LocationCallback() {
             this.listeners.add(listener)
         }
 
+        fun unregisterListener(listener: OnLocationChangedListener) {
+            this.listeners.remove(listener)
+        }
+
         fun notifyListeners(locationResult: LocationResult) {
             Log.i("Check Listeners", listeners.toString() )
             val location = locationResult.lastLocation

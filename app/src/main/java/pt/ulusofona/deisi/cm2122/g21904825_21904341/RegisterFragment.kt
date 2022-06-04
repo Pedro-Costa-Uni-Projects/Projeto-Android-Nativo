@@ -67,6 +67,11 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.register)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        FusedLocation.unregisterListener(this)
+    }
+
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_register, container, false)
         binding = FragmentRegisterBinding.bind(view)
