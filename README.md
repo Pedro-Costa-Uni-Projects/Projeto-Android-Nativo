@@ -2,7 +2,7 @@
 
 ## Feito por: Pedro Costa - 21904825 & Tomás Maia - 21904341
 
-### Video: https://youtu.be/96IUQoHOA5U
+### Video: https://youtu.be/lnjgCDtQ9gE
 
 ### Autoavaliação:
     - Parte 1: 17
