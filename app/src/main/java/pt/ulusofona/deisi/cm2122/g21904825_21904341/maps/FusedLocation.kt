@@ -34,20 +34,19 @@ class FusedLocation private constructor(context: Context) : LocationCallback() {
     }
 
     companion object {
-        private var listener: OnLocationChangedListener? = null
+        private var listeners: MutableList<OnLocationChangedListener> = arrayListOf()
         private var instance: FusedLocation? = null
 
         fun registerListener(listener: OnLocationChangedListener) {
-            this.listener = listener
-        }
-
-        fun unregisterListener() {
-            listener = null
+            this.listeners.add(listener)
         }
 
         fun notifyListeners(locationResult: LocationResult) {
+            Log.i("Check Listeners", listeners.toString() )
             val location = locationResult.lastLocation
-            listener?.onLocationChanged(location.latitude, location.longitude)
+            for (l in listeners) {
+                l.onLocationChanged(location.latitude, location.longitude)
+            }
         }
 
         fun start(context: Context) {

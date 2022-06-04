@@ -72,7 +72,6 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener, AdapterView.OnI
 
     override fun onDestroy() {
         super.onDestroy()
-        FusedLocation.unregisterListener()
     }
 
     override fun onStart() {
