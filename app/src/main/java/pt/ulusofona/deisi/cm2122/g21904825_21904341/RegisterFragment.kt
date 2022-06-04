@@ -159,16 +159,19 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
     }
 
     override fun onLocationChanged(latitude: Double, longitude: Double) {
+        //Se não houver ligação a internet dá erro
         try {
             val addresses = geocoder.getFromLocation(latitude, longitude, 5)
             this.latitude = latitude
             this.longitude = longitude
 
+            //Para não dar erro pois as vezes a api do google maps não encontra o concelho
             try {
                 this.district = addresses[0].adminArea
                 this.county = addresses[0].locality
             } catch (ex2: NullPointerException) {
                 Log.e(TAG, ex2.toString())
+                //se não encontrar o concelho, mete o concelho igual ao distrito
                 this.county = addresses[0].adminArea
             }
 

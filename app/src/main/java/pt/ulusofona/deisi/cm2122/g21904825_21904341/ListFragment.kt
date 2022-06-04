@@ -29,13 +29,20 @@ class ListFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.list)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Singleton.getList {
+            fires = Singleton.getFires()
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED //Para poder rodar o ecrã depois de vir do Register
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.list)
-        Singleton.getList{updateAdapter()}
         binding.rvHistoricFragment.layoutManager = LinearLayoutManager(activity as Context)
         binding.rvHistoricFragment.adapter = adapter
+        updateAdapter()
     }
 
     override fun onCreateView(
@@ -54,11 +61,10 @@ class ListFragment : Fragment() {
     }
 
     private fun updateAdapter() {
-        fires = Singleton.getList {}
+        fires = Singleton.getFires()
         CoroutineScope(Dispatchers.Main).launch {
             adapter.updateItems(fires)
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

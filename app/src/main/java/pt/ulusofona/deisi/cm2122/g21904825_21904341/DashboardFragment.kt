@@ -57,14 +57,17 @@ class DashboardFragment : Fragment(), OnLocationChangedListener {
     }
 
     override fun onLocationChanged(latitude: Double, longitude: Double) {
+        //Se não houver ligação a internet dá erro
         try {
             val addresses = geocoder.getFromLocation(latitude, longitude, 5)
 
+            //Para não dar erro pois as vezes a api do google maps não encontra o concelho
             try {
                 Singleton.setDistrict(addresses[0].adminArea)
                 Singleton.setCounty(addresses[0].locality)
             } catch (ex2: NullPointerException) {
                 Log.e(TAG, ex2.toString())
+                //se não encontrar o concelho, mete o concelho igual ao distrito
                 Singleton.setCounty(addresses[0].adminArea)
             }
 

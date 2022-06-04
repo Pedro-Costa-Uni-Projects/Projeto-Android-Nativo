@@ -151,40 +151,44 @@ class MainActivity : AppCompatActivity(), OnLocationChangedListener {
         } catch (ex: IOException) {
             Log.e(TAG, ex.toString())
         }
-        Singleton.getRisk {
 
-            //Dedicado ao Bernardo
-            try {
-                when(Singleton.risco.split("\r")[1].split(" - ")[1].split(",")[0]) {
-                    "Reduzido" -> {
-                        binding.risk.setBackgroundColor(getColor(R.color.reduced))
-                        binding.risk.text = getString(R.string.reduced)
-                    }
-                    "Moderado" -> {
-                        binding.risk.setBackgroundColor(getColor(R.color.moderate))
-                        binding.risk.text = getString(R.string.moderate)
-                    }
-                    "Elevado" -> {
-                        binding.risk.setBackgroundColor(getColor(R.color.high))
-                        binding.risk.text = getString(R.string.high)
-                    }
-                    "Muito Elevado" -> {
-                        binding.risk.setBackgroundColor(getColor(R.color.very_high))
-                        binding.risk.text = getString(R.string.very_high)
-                    }
-                    "Máximo" -> {
-                        binding.risk.setBackgroundColor(getColor(R.color.maximum))
-                        binding.risk.text = getString(R.string.maximum)
+        //Para depois o retrofit não dar erro a tentar enviar o pedido de risco no Singleton
+        if (ConnectivityUtil.isOnline(this.applicationContext)) {
+            Singleton.getRisk {
+                //Para o caso de a api fogos.pt nao encontrar o concelho por alguma razão
+                try {
+                    //Dedicado ao Bernardo
+                    when(Singleton.risco.split("\r")[1].split(" - ")[1].split(",")[0]) {
+                        "Reduzido" -> {
+                            binding.risk.setBackgroundColor(getColor(R.color.reduced))
+                            binding.risk.text = getString(R.string.reduced)
+                        }
+                        "Moderado" -> {
+                            binding.risk.setBackgroundColor(getColor(R.color.moderate))
+                            binding.risk.text = getString(R.string.moderate)
+                        }
+                        "Elevado" -> {
+                            binding.risk.setBackgroundColor(getColor(R.color.high))
+                            binding.risk.text = getString(R.string.high)
+                        }
+                        "Muito Elevado" -> {
+                            binding.risk.setBackgroundColor(getColor(R.color.very_high))
+                            binding.risk.text = getString(R.string.very_high)
+                        }
+                        "Máximo" -> {
+                            binding.risk.setBackgroundColor(getColor(R.color.maximum))
+                            binding.risk.text = getString(R.string.maximum)
+                        }
+
                     }
 
+                } catch (ex: IndexOutOfBoundsException) {
+                    Log.e(TAG, Singleton.risco)
                 }
 
-            } catch (ex: IndexOutOfBoundsException) {
-                Log.e(TAG, Singleton.risco)
             }
-
-
         }
+
     }
 
 }
