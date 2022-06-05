@@ -46,8 +46,8 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
     private var photo : String? = null
     private var latitude : Double = 0.0
     private var longitude : Double = 0.0
-    private var district : String = ""
-    private var county : String = ""
+    private var district : String = "NaN"
+    private var county : String = "NaN"
 
     //Para não rodar o ecrã
     override fun onResume() {
@@ -134,7 +134,7 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
             }
 
             //Submit
-            if (name != "" && cc != 0 && district != "") {
+            if (name != "" && cc != 0 && (district != "NaN" || latitude != 0.0)) { //(district != "NaN" || latitude != 0.0) um destes dois para o caso de não haver internet
                 val fire = FireRoom(false, name, cc, district, county, "NaN", 0, 0, 0, "NaN", timestamp, "NaN", photo, latitude, longitude)
 
                 CoroutineScope(Dispatchers.IO).launch {
@@ -164,11 +164,11 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
     }
 
     override fun onLocationChanged(latitude: Double, longitude: Double) {
+        this.latitude = latitude
+        this.longitude = longitude
         //Se não houver ligação a internet dá erro
         try {
             val addresses = geocoder.getFromLocation(latitude, longitude, 5)
-            this.latitude = latitude
-            this.longitude = longitude
 
             //Para não dar erro pois as vezes a api do google maps não encontra o concelho
             try {
@@ -179,11 +179,12 @@ class RegisterFragment : Fragment(), OnLocationChangedListener {
                 //se não encontrar o concelho, mete o concelho igual ao distrito
                 this.county = addresses[0].adminArea
             }
-
+            binding.localization.text = "${district}, ${county}"
         } catch (ex: IOException) {
             Log.e(TAG, ex.toString())
+            //se não houver internet mete no ecrã a latitude e a longitude
+            binding.localization.text = "Lat:${this.latitude}, Lng:${this.longitude}"
         }
-        binding.localization.text = "${district}, ${county}"
 
     }
 }
