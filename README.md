@@ -3,7 +3,7 @@
 ## Avaliação Final: 13
 
 ### Descrição: 
-Projeto feito no âmbito da cadeira de computação móvel, tendo como objetivo criar uma aplicação móvel android nativa, para melhorar e acrescentar funcionalidades (o utilizador pode adicionar fogos), a aplicação já existente Fogos.pt, usando para isso a linguagem Kotlin.
+Projeto feito no âmbito da cadeira de computação móvel, tendo como objetivo criar uma aplicação móvel android nativa, para melhorar e acrescentar funcionalidades (o utilizador pode registar fogos), a aplicação já existente Fogos.pt, usando para isso a linguagem Kotlin.
 
 ## Feito por: Pedro Costa - 21904825 & Tomás Maia - 21904341
 
